@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
+import java.util.Map;
 
 public class EntityMetadata {
 
@@ -38,6 +39,10 @@ public class EntityMetadata {
 
     public @NotNull Metadata getMetadata() {
         return this.metadata;
+    }
+
+    public @NotNull Map<Integer, Metadata.Entry<?>> getEntries() {
+        return this.metadata.getEntries();
     }
 
     public void setOnFire(boolean value) {
