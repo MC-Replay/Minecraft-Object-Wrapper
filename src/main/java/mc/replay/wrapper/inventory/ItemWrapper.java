@@ -5,9 +5,10 @@ import com.github.steveice10.opennbt.tag.builtin.ListTag;
 import com.github.steveice10.opennbt.tag.builtin.ShortTag;
 import com.github.steveice10.opennbt.tag.builtin.StringTag;
 import mc.replay.packetlib.data.Item;
-import mc.replay.packetlib.data.PlayerProfile;
+import mc.replay.packetlib.data.PlayerProfileProperty;
 import mc.replay.packetlib.utils.NBTUtils;
-import mc.replay.packetlib.utils.Reflections;
+import mc.replay.wrapper.data.PlayerProfile;
+import mc.replay.wrapper.utils.WrapperReflections;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -49,7 +50,7 @@ public final class ItemWrapper extends Item {
             }
 
             if (itemMeta instanceof SkullMeta skullMeta) {
-                PlayerProfile playerProfile = Reflections.getGameProfile(skullMeta);
+                PlayerProfile playerProfile = WrapperReflections.getGameProfileFromSkullMeta(skullMeta);
                 if (playerProfile != null) {
                     CompoundTag skullOwnerTag = new CompoundTag("SkullOwner");
                     skullOwnerTag.put(new StringTag("Name", playerProfile.name()));
@@ -58,7 +59,7 @@ public final class ItemWrapper extends Item {
                     if (!playerProfile.properties().isEmpty()) {
                         CompoundTag propertiesTag = new CompoundTag("Properties");
 
-                        for (Map.Entry<String, PlayerProfile.Property> entry : playerProfile.properties().entrySet()) {
+                        for (Map.Entry<String, PlayerProfileProperty> entry : playerProfile.properties().entrySet()) {
                             ListTag listTag = new ListTag(entry.getKey());
 
                             CompoundTag propertyTag = new CompoundTag("");
