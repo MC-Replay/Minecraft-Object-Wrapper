@@ -54,12 +54,34 @@ public class EntityWrapper {
         return this.entityMetadata;
     }
 
+    public @NotNull Pos getPosition() {
+        return this.position;
+    }
+
+    public void setPosition(@NotNull Pos position) {
+        this.position = position;
+    }
+
+    public void setPosition(double x, double y, double z, float yaw, float pitch) {
+        this.setPosition(new Pos(x, y, z, yaw, pitch));
+    }
+
+    public void setPosition(double x, double y, double z) {
+        this.setPosition(new Pos(x, y, z, this.position.yaw(), this.position.pitch()));
+    }
+
     public final <T extends EntityMetadata> @Nullable T getMetaData(@NotNull Class<T> clazz) {
         if (clazz.isAssignableFrom(this.entityMetadata.getClass())) {
             return clazz.cast(this.entityMetadata);
         }
 
         return null;
+    }
+
+    public void addMetadata(@NotNull Map<@NotNull Integer, Metadata.Entry<?>> entries) {
+        for (Map.Entry<Integer, Metadata.Entry<?>> entry : entries.entrySet()) {
+            this.metadata.setIndex(entry.getKey(), entry.getValue());
+        }
     }
 
     private void readDataWatcherItems(@NotNull Entity entity) {
