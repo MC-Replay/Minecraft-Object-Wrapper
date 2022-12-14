@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 public interface ProjectileMetadata {
 
-    @Nullable EntityWrapper getShooter();
-
     void setShooter(@Nullable EntityWrapper shooter);
+
+    @Nullable EntityWrapper getShooter();
 }

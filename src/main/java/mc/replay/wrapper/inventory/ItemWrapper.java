@@ -26,7 +26,7 @@ public final class ItemWrapper extends Item {
         this(of(itemStack));
     }
 
-    private ItemWrapper(Item item) {
+    public ItemWrapper(Item item) {
         this(item.materialId(), item.amount(), item.meta());
     }
 
