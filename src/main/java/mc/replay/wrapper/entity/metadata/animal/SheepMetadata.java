@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class SheepMetadata extends AnimalMetadata {
 
-    public static final byte OFFSET = AnimalMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     private static final byte COLOR_BITS = 0x0F;
     private static final byte SHEARED_BIT = 0x10;

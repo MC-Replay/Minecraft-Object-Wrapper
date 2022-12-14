@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class DragonFireballMetadata extends EntityMetadata implements ObjectDataProvider, ProjectileMetadata {
 
-    public static final byte OFFSET = EntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = EntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     private EntityWrapper shooter;
 

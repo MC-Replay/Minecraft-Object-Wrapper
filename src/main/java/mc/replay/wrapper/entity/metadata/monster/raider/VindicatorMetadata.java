@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class VindicatorMetadata extends AbstractIllagerMetadata {
 
-    public static final byte OFFSET = AbstractIllagerMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = AbstractIllagerMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     public VindicatorMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

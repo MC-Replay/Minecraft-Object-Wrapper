@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class WitherSkullMetadata extends EntityMetadata implements ObjectDataProvider, ProjectileMetadata {
 
-    public static final byte OFFSET = EntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = EntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     private EntityWrapper shooter;
 

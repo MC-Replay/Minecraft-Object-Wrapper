@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class BeeMetadata extends AnimalMetadata {
 
-    public static final byte OFFSET = AnimalMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 2;
+    public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 2;
 
     private static final byte ANGRY_BIT = 0x02;
     private static final byte HAS_STUNG_BIT = 0x04;

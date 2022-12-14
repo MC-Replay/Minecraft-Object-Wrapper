@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ArmorStandMetadata extends LivingEntityMetadata {
 
-    public static final byte OFFSET = LivingEntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 7;
+    public static final int OFFSET = LivingEntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 7;
 
     private static final byte IS_SMALL_BIT = 0x01;
     private static final byte HAS_ARMS_BIT = 0x04;

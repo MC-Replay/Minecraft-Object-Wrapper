@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class GhastMetadata extends FlyingMetadata {
 
-    public static final byte OFFSET = FlyingMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = FlyingMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     public GhastMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

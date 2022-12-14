@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class EndCrystalMetadata extends EntityMetadata {
 
-    public static final byte OFFSET = EntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 2;
+    public static final int OFFSET = EntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 2;
 
     public EndCrystalMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

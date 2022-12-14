@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class SpectralArrowMetadata extends AbstractArrowMetadata implements ObjectDataProvider, ProjectileMetadata {
 
-    public static final byte OFFSET = AbstractArrowMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = AbstractArrowMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     private EntityWrapper shooter;
 

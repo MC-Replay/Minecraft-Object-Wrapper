@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ThrownEnderPearlMetadata extends ItemContainingMetadata {
 
-    public static final byte OFFSET = ItemContainingMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = ItemContainingMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     public ThrownEnderPearlMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata, Material.ENDER_PEARL);

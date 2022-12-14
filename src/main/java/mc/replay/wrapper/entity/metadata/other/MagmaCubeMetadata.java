@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class MagmaCubeMetadata extends SlimeMetadata {
 
-    public static final byte OFFSET = SlimeMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = SlimeMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     public MagmaCubeMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

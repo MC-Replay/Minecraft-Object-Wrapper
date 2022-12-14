@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ShulkerMetadata extends AbstractGolemMetadata {
 
-    public static final byte OFFSET = AbstractGolemMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 4;
+    public static final int OFFSET = AbstractGolemMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 4;
 
     public ShulkerMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

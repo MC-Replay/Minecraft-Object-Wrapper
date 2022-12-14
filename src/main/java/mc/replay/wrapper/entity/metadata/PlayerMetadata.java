@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class PlayerMetadata extends LivingEntityMetadata {
 
-    public static final byte OFFSET = LivingEntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = LivingEntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     private final static byte CAPE_BIT = 0x01;
     private final static byte JACKET_BIT = 0x02;

@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class PrimedTntMetadata extends EntityMetadata {
 
-    public static final byte OFFSET = EntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = EntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     public PrimedTntMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

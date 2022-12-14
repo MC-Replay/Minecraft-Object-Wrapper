@@ -10,8 +10,8 @@ import java.util.UUID;
 
 public class TameableAnimalMetadata extends AnimalMetadata {
 
-    public static final byte OFFSET = AnimalMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 2;
+    public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 2;
 
     private static final byte SITTING_BIT = 0x01;
     private static final byte TAMED_BIT = 0x04;

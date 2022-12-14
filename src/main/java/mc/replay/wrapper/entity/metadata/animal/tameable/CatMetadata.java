@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class CatMetadata extends TameableAnimalMetadata {
 
-    public static final byte OFFSET = TameableAnimalMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 4;
+    public static final int OFFSET = TameableAnimalMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 4;
 
     public CatMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

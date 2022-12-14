@@ -10,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class PaintingMetadata extends EntityMetadata {
 
-    public static final byte OFFSET = EntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = EntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     private Motive motive = Motive.KEBAB;
     private BlockFace direction = BlockFace.SOUTH;

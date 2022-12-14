@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class PandaMetadata extends AnimalMetadata {
 
-    public static final byte OFFSET = AnimalMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 6;
+    public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 6;
 
     private static final byte SNEEZING_BIT = 0x02;
     private static final byte ROLLING_BIT = 0x04;

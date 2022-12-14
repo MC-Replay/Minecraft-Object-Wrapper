@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ElderGuardianMetadata extends GuardianMetadata {
 
-    public static final byte OFFSET = GuardianMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = GuardianMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     public ElderGuardianMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

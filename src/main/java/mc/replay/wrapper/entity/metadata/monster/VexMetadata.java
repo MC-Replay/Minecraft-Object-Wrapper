@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class VexMetadata extends MonsterMetadata {
 
-    public static final byte OFFSET = MonsterMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     private static final byte ATTACKING_BIT = 0x01;
 

@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class AbstractSkeletonMetadata extends MonsterMetadata {
 
-    public static final byte OFFSET = MonsterMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     protected AbstractSkeletonMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ThrownTridentMetadata extends AbstractArrowMetadata {
 
-    public static final byte OFFSET = AbstractArrowMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 2;
+    public static final int OFFSET = AbstractArrowMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 2;
 
     public ThrownTridentMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

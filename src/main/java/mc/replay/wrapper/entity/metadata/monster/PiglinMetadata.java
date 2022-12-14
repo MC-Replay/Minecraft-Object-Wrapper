@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class PiglinMetadata extends BasePiglinMetadata {
 
-    public static final byte OFFSET = BasePiglinMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 3;
+    public static final int OFFSET = BasePiglinMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 3;
 
     public PiglinMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

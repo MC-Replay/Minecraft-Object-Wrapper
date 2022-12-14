@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class LivingEntityMetadata extends EntityMetadata {
 
-    public static final byte OFFSET = EntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 7;
+    public static final int OFFSET = EntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 7;
 
     private static final byte IS_HAND_ACTIVE_BIT = 0x01;
     private static final byte ACTIVE_HAND_BIT = 0x02;

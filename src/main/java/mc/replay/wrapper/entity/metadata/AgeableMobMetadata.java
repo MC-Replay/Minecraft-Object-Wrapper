@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class AgeableMobMetadata extends MobMetadata {
 
-    public static final byte OFFSET = MobMetadata.OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = MobMetadata.OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     public AgeableMobMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

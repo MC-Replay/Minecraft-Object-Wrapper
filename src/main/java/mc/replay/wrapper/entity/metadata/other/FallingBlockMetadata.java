@@ -11,8 +11,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class FallingBlockMetadata extends EntityMetadata implements ObjectDataProvider {
 
-    public static final byte OFFSET = EntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = EntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     // TODO change material to block object with stateId and type
     private Material material = Material.STONE;

@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class AbstractFishMetadata extends WaterAnimalMetadata {
 
-    public static final byte OFFSET = WaterAnimalMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = WaterAnimalMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     protected AbstractFishMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class CaveSpiderMetadata extends SpiderMetadata {
 
-    public static final byte OFFSET = SpiderMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET;
+    public static final int OFFSET = SpiderMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET;
 
     public CaveSpiderMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

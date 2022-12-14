@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class VillagerMetadata extends AbstractVillagerMetadata {
 
-    public static final byte OFFSET = AbstractVillagerMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = AbstractVillagerMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     public VillagerMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

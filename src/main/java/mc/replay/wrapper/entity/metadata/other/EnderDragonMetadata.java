@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class EnderDragonMetadata extends MobMetadata {
 
-    public static final byte OFFSET = MobMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = MobMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     public EnderDragonMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

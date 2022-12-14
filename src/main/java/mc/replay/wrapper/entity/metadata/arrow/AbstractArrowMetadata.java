@@ -8,8 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class AbstractArrowMetadata extends EntityMetadata {
 
-    public static final byte OFFSET = EntityMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 2;
+    public static final int OFFSET = EntityMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 2;
 
     private static final byte CRITICAL_BIT = 0x01;
     private static final byte NO_CLIP_BIT = 0x02;

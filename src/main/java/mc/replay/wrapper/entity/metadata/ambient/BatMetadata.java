@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class BatMetadata extends AmbientCreatureMetadata {
 
-    public static final byte OFFSET = AmbientCreatureMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = AmbientCreatureMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     private static final byte IS_HANGING_BIT = 0x01;
 

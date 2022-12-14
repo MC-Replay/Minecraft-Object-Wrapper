@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class EndermanMetadata extends MonsterMetadata {
 
-    public static final byte OFFSET = MonsterMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 3;
+    public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 3;
 
     public EndermanMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

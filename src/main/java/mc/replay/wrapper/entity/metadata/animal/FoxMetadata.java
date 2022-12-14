@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public class FoxMetadata extends AnimalMetadata {
 
-    public static final byte OFFSET = AnimalMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 4;
+    public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 4;
 
     private static final byte SITTING_BIT = 0x01;
     private static final byte CROUCHING_BIT = 0x04;

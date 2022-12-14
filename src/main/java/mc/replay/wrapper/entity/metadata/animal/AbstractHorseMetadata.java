@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public class AbstractHorseMetadata extends AnimalMetadata {
 
-    public static final byte OFFSET = AnimalMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 2;
+    public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 2;
 
     private static final byte TAMED_BIT = 0x02;
     private static final byte SADDLED_BIT = 0x04;

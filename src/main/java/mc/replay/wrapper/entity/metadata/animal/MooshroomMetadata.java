@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class MooshroomMetadata extends CowMetadata {
 
-    public static final byte OFFSET = CowMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 1;
+    public static final int OFFSET = CowMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 1;
 
     public MooshroomMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

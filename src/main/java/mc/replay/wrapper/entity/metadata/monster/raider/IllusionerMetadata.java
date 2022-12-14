@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class IllusionerMetadata extends SpellCasterIllagerMetadata {
 
-    public static final byte OFFSET = SpellCasterIllagerMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = SpellCasterIllagerMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     public IllusionerMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ChestMinecartMetadata extends AbstractMinecartContainerMetadata {
 
-    public static final byte OFFSET = AbstractMinecartContainerMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = AbstractMinecartContainerMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     public ChestMinecartMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

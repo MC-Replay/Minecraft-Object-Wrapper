@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class GlowItemFrameMetadata extends ItemFrameMetadata {
 
-    public static final byte OFFSET = ItemFrameMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = ItemFrameMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     public GlowItemFrameMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

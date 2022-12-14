@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class MuleMetadata extends ChestedHorseMetadata {
 
-    public static final byte OFFSET = ChestedHorseMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = ChestedHorseMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     public MuleMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata);

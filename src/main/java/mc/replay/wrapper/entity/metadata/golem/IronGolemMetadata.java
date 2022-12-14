@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class IronGolemMetadata extends AbstractGolemMetadata {
 
-    public static final byte OFFSET = AbstractGolemMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = AbstractGolemMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     private static final byte PLAYER_CREATED_BIT = 0x01;
 

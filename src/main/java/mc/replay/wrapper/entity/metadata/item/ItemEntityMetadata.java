@@ -9,8 +9,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemEntityMetadata extends ItemContainingMetadata implements ObjectDataProvider {
 
-    public static final byte OFFSET = ItemContainingMetadata.MAX_OFFSET;
-    public static final byte MAX_OFFSET = OFFSET + 0;
+    public static final int OFFSET = ItemContainingMetadata.MAX_OFFSET;
+    public static final int MAX_OFFSET = OFFSET + 0;
 
     public ItemEntityMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
         super(entity, metadata, Material.AIR);
