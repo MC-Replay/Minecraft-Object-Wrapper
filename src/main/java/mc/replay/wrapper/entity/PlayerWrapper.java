@@ -1,8 +1,9 @@
 package mc.replay.wrapper.entity;
 
-import mc.replay.wrapper.entity.metadata.PlayerMetadata;
 import mc.replay.wrapper.data.PlayerProfile;
 import mc.replay.wrapper.data.SkinTexture;
+import mc.replay.wrapper.entity.metadata.PlayerMetadata;
+import mc.replay.wrapper.utils.WrapperReflections;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +22,10 @@ public class PlayerWrapper extends LivingEntityWrapper {
         this.profile = profile;
         this.username = profile.name();
         this.skin = SkinTexture.fromProfile(profile);
+    }
+
+    public PlayerWrapper(PlayerProfile profile) {
+        this(WrapperReflections.getNewEntityId(), profile);
     }
 
     public PlayerWrapper(@NotNull Player player) {

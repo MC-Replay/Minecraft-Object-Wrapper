@@ -14,6 +14,10 @@ public class LivingEntityWrapper extends EntityWrapper {
         super(entityType, entityId, uuid);
     }
 
+    public LivingEntityWrapper(@NotNull EntityType entityType, @NotNull UUID uuid) {
+        super(entityType, uuid);
+    }
+
     public LivingEntityWrapper(@NotNull LivingEntity entity) {
         super(entity);
     }

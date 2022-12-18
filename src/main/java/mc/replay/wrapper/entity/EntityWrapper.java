@@ -6,6 +6,7 @@ import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import mc.replay.wrapper.utils.WrapperReflections;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,20 +25,28 @@ public class EntityWrapper {
 
     protected Pos position;
 
+    protected Vector velocity;
+
     public EntityWrapper(@NotNull EntityType entityType, int entityId, @NotNull UUID uuid) {
         this.id = entityId;
         this.uuid = uuid;
         this.entityType = entityType;
 
         this.position = new Pos(0, 0, 0, 0, 0);
+        this.velocity = new Vector(0, 0, 0);
 
         this.entityMetadata = EntityTypes.createMetadata(entityType, this, this.metadata);
+    }
+
+    public EntityWrapper(@NotNull EntityType entityType, @NotNull UUID uuid) {
+        this(entityType, WrapperReflections.getNewEntityId(), uuid);
     }
 
     public EntityWrapper(@NotNull Entity entity) {
         this(entity.getType(), entity.getEntityId(), entity.getUniqueId());
 
         this.position = Pos.from(entity.getLocation());
+        this.velocity = entity.getVelocity();
 
         this.readDataWatcherItems(entity);
     }
@@ -46,8 +55,12 @@ public class EntityWrapper {
         return this.id;
     }
 
-    public UUID getUniqueId() {
+    public @NotNull UUID getUniqueId() {
         return this.uuid;
+    }
+
+    public @NotNull EntityType getType() {
+        return this.entityType;
     }
 
     public EntityMetadata getMetadata() {
@@ -56,6 +69,10 @@ public class EntityWrapper {
 
     public @NotNull Pos getPosition() {
         return this.position;
+    }
+
+    public @NotNull Vector getVelocity() {
+        return this.velocity;
     }
 
     public void setPosition(@NotNull Pos position) {
@@ -68,6 +85,10 @@ public class EntityWrapper {
 
     public void setPosition(double x, double y, double z) {
         this.setPosition(new Pos(x, y, z, this.position.yaw(), this.position.pitch()));
+    }
+
+    public void setVelocity(@NotNull Vector velocity) {
+        this.velocity = velocity;
     }
 
     public final <T extends EntityMetadata> @Nullable T getMetaData(@NotNull Class<T> clazz) {

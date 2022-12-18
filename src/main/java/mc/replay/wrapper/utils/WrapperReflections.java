@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class WrapperReflections {
 
@@ -35,6 +36,8 @@ public final class WrapperReflections {
     private static Class<?> CRAFT_ENTITY;
 
     private static MethodHandle GET_ENTITY_HANDLE_METHOD;
+
+    private static Field ENTITY_COUNT_FIELD;
 
     private static Field DATA_WATCHER_FIELD;
     private static Method GET_DATA_WATCHER_ITEMS_METHOD;
@@ -63,6 +66,8 @@ public final class WrapperReflections {
             CRAFT_ENTITY = ReflectionUtils.obcClass("entity.CraftEntity");
 
             GET_ENTITY_HANDLE_METHOD = lookup.findVirtual(CRAFT_ENTITY, "getHandle", MethodType.methodType(ENTITY));
+
+            ENTITY_COUNT_FIELD = ReflectionUtils.getField(ENTITY, "entityCount"); // TODO fix for other versions
 
             Class<?> CRAFT_META_SKULL = ReflectionUtils.obcClass("inventory.CraftMetaSkull");
             Class<?> GAME_PROFILE = ReflectionUtils.getClass("com.mojang.authlib.GameProfile");
@@ -147,6 +152,15 @@ public final class WrapperReflections {
             throwable.printStackTrace();
         }
         return entries;
+    }
+
+    public static int getNewEntityId() {
+        try {
+            AtomicInteger entityCount = (AtomicInteger) ENTITY_COUNT_FIELD.get(null);
+            return entityCount.getAndIncrement();
+        } catch (IllegalAccessException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
     private static int getSerializerId(Object item) throws IllegalAccessException {
