@@ -9,9 +9,11 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Function;
+
 public class PlayerWrapper extends LivingEntityWrapper {
 
-    private final PlayerProfile profile;
+    private PlayerProfile profile;
 
     private final String username;
     private SkinTexture skin;
@@ -53,7 +55,17 @@ public class PlayerWrapper extends LivingEntityWrapper {
     }
 
     @Override
-    public @Nullable PlayerMetadata getMetadata() {
+    public @NotNull PlayerMetadata getMetadata() {
         return this.getMetaData(PlayerMetadata.class);
+    }
+
+    @Override
+    public @NotNull PlayerWrapper withUniqueId() {
+        return (PlayerWrapper) super.withUniqueId();
+    }
+
+    public @NotNull PlayerWrapper withProfile(@NotNull Function<@NotNull PlayerProfile, @NotNull PlayerProfile> function) {
+        this.profile = function.apply(this.profile);
+        return this;
     }
 }

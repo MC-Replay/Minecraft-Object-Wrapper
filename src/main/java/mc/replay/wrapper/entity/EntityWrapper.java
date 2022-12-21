@@ -8,14 +8,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.UUID;
 
 public class EntityWrapper {
 
-    protected final int id;
+    protected int id;
     protected final UUID uuid;
 
     protected final EntityType entityType;
@@ -91,12 +90,12 @@ public class EntityWrapper {
         this.velocity = velocity;
     }
 
-    public final <T extends EntityMetadata> @Nullable T getMetaData(@NotNull Class<T> clazz) {
+    public final <T extends EntityMetadata> @NotNull T getMetaData(@NotNull Class<T> clazz) {
         if (clazz.isAssignableFrom(this.entityMetadata.getClass())) {
             return clazz.cast(this.entityMetadata);
         }
 
-        return null;
+        throw new IllegalArgumentException("The metadata class " + clazz.getName() + " is not assignable from " + this.entityMetadata.getClass().getName());
     }
 
     public void addMetadata(@NotNull Map<@NotNull Integer, Metadata.Entry<?>> entries) {
@@ -110,5 +109,10 @@ public class EntityWrapper {
         for (Map.Entry<Integer, Metadata.Entry<?>> entry : entries.entrySet()) {
             this.metadata.setIndex(entry.getKey(), entry.getValue());
         }
+    }
+
+    public @NotNull EntityWrapper withUniqueId() {
+        this.id = WrapperReflections.getNewEntityId();
+        return this;
     }
 }

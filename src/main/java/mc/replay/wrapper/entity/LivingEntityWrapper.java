@@ -23,7 +23,12 @@ public class LivingEntityWrapper extends EntityWrapper {
     }
 
     @Override
-    public @Nullable LivingEntityMetadata getMetadata() {
+    public @NotNull LivingEntityMetadata getMetadata() {
         return this.getMetaData(LivingEntityMetadata.class);
+    }
+
+    @Override
+    public @NotNull LivingEntityWrapper withUniqueId() {
+        return (LivingEntityWrapper) super.withUniqueId();
     }
 }

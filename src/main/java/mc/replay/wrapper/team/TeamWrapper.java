@@ -135,4 +135,34 @@ public class TeamWrapper {
     public @NotNull CollisionRule getCollisionRule() {
         return collisionRule;
     }
+
+    public @NotNull TeamWrapper withDisplayName(@NotNull Component displayName) {
+        this.setDisplayName(displayName);
+        return this;
+    }
+
+    public @NotNull TeamWrapper withPrefix(@NotNull Component prefix) {
+        this.setPrefix(prefix);
+        return this;
+    }
+
+    public @NotNull TeamWrapper withSuffix(@NotNull Component suffix) {
+        this.setSuffix(suffix);
+        return this;
+    }
+
+    public @NotNull TeamWrapper withColor(@NotNull NamedTextColor color) {
+        this.setColor(color);
+        return this;
+    }
+
+    public @NotNull TeamWrapper withVisibility(@NotNull NameTagVisibility visibility) {
+        this.setVisibility(visibility);
+        return this;
+    }
+
+    public @NotNull TeamWrapper withCollisionRule(@NotNull CollisionRule collisionRule) {
+        this.setCollisionRule(collisionRule);
+        return this;
+    }
 }
