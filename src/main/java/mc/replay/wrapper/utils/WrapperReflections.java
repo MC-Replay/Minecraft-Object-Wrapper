@@ -31,36 +31,36 @@ public final class WrapperReflections {
     private WrapperReflections() {
     }
 
-    private static Class<?> ENTITY;
-    private static Class<?> ENTITY_HUMAN;
-    private static Class<?> DATA_WATCHER;
-    private static Class<?> DATA_WATCHER_REGISTRY;
-    private static Class<?> DATA_WATCHER_SERIALIZER;
-    private static Class<?> DATA_WATCHER_ITEM;
-    private static Class<?> DATA_WATCHER_OBJECT;
-    private static Class<?> CRAFT_ENTITY;
+    public static Class<?> ENTITY;
+    public static Class<?> ENTITY_HUMAN;
+    public static Class<?> DATA_WATCHER;
+    public static Class<?> DATA_WATCHER_REGISTRY;
+    public static Class<?> DATA_WATCHER_SERIALIZER;
+    public static Class<?> DATA_WATCHER_ITEM;
+    public static Class<?> DATA_WATCHER_OBJECT;
+    public static Class<?> CRAFT_ENTITY;
 
-    private static MethodHandle GET_ENTITY_HANDLE_METHOD;
+    public static MethodHandle GET_ENTITY_HANDLE_METHOD;
 
-    private static Field ENTITY_COUNT_FIELD;
+    public static Field ENTITY_COUNT_FIELD;
 
-    private static Field DATA_WATCHER_FIELD;
-    private static Method GET_DATA_WATCHER_ITEMS_METHOD;
-    private static Field GET_DATA_WATCHER_ITEM_OBJECT_FIELD;
-    private static Field GET_DATA_WATCHER_ITEM_VALUE_FIELD;
-    private static Field GET_DATA_WATCHER_OBJECT_INDEX_FIELD;
-    private static Method GET_DATA_WATCHER_OBJECT_SERIALIZER_METHOD;
-    private static Method GET_DATA_WATCHER_SERIALIZER_TYPE_METHOD;
-    private static Method WRITE_DATA_WATCHER_OBJECT_METHOD;
+    public static Field DATA_WATCHER_FIELD;
+    public static Method GET_DATA_WATCHER_ITEMS_METHOD;
+    public static Field GET_DATA_WATCHER_ITEM_OBJECT_FIELD;
+    public static Field GET_DATA_WATCHER_ITEM_VALUE_FIELD;
+    public static Field GET_DATA_WATCHER_OBJECT_INDEX_FIELD;
+    public static Method GET_DATA_WATCHER_OBJECT_SERIALIZER_METHOD;
+    public static Method GET_DATA_WATCHER_SERIALIZER_TYPE_METHOD;
+    public static Method WRITE_DATA_WATCHER_OBJECT_METHOD;
 
-    private static Field GAME_PROFILE_ENTITY_PLAYER_FIELD;
-    private static Field GAME_PROFILE_SKULL_META_FIELD;
-    private static Field GAME_PROFILE_UUID_FIELD;
-    private static Field GAME_PROFILE_NAME_FIELD;
-    private static Field GAME_PROFILE_PROPERTIES_FIELD;
-    private static Field PROPERTY_NAME_FIELD;
-    private static Field PROPERTY_VALUE_FIELD;
-    private static Field PROPERTY_SIGNATURE_FIELD;
+    public static Field GAME_PROFILE_ENTITY_PLAYER_FIELD;
+    public static Field GAME_PROFILE_SKULL_META_FIELD;
+    public static Field GAME_PROFILE_UUID_FIELD;
+    public static Field GAME_PROFILE_NAME_FIELD;
+    public static Field GAME_PROFILE_PROPERTIES_FIELD;
+    public static Field PROPERTY_NAME_FIELD;
+    public static Field PROPERTY_VALUE_FIELD;
+    public static Field PROPERTY_SIGNATURE_FIELD;
 
     static {
         try {
