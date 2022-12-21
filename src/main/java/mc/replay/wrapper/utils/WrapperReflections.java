@@ -1,6 +1,8 @@
 package mc.replay.wrapper.utils;
 
 import com.google.common.collect.ForwardingMultimap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import mc.replay.packetlib.data.PlayerProfileProperty;
 import mc.replay.packetlib.data.entity.Metadata;
 import mc.replay.packetlib.network.PacketBuffer;
@@ -12,16 +14,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.String;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.nio.ByteBuffer;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static mc.replay.packetlib.data.entity.Metadata.*;
 
 public final class WrapperReflections {
 
@@ -31,6 +34,8 @@ public final class WrapperReflections {
     private static Class<?> ENTITY;
     private static Class<?> ENTITY_HUMAN;
     private static Class<?> DATA_WATCHER;
+    private static Class<?> DATA_WATCHER_REGISTRY;
+    private static Class<?> DATA_WATCHER_SERIALIZER;
     private static Class<?> DATA_WATCHER_ITEM;
     private static Class<?> DATA_WATCHER_OBJECT;
     private static Class<?> CRAFT_ENTITY;
@@ -43,7 +48,10 @@ public final class WrapperReflections {
     private static Method GET_DATA_WATCHER_ITEMS_METHOD;
     private static Field GET_DATA_WATCHER_ITEM_OBJECT_FIELD;
     private static Field GET_DATA_WATCHER_ITEM_VALUE_FIELD;
-    private static Field GET_DATA_WATCHER_OBJECT_SERIALIZER_ID_FIELD;
+    private static Field GET_DATA_WATCHER_OBJECT_INDEX_FIELD;
+    private static Method GET_DATA_WATCHER_OBJECT_SERIALIZER_METHOD;
+    private static Method GET_DATA_WATCHER_SERIALIZER_TYPE_METHOD;
+    private static Method WRITE_DATA_WATCHER_OBJECT_METHOD;
 
     private static Field GAME_PROFILE_ENTITY_PLAYER_FIELD;
     private static Field GAME_PROFILE_SKULL_META_FIELD;
@@ -61,6 +69,8 @@ public final class WrapperReflections {
             ENTITY = ReflectionUtils.nmsClass("world.entity", "Entity");
             ENTITY_HUMAN = ReflectionUtils.nmsClass("world.entity.player", "EntityHuman");
             DATA_WATCHER = ReflectionUtils.nmsClass("network.syncher", "DataWatcher");
+            DATA_WATCHER_REGISTRY = ReflectionUtils.nmsClass("network.syncher", "DataWatcherRegistry");
+            DATA_WATCHER_SERIALIZER = ReflectionUtils.nmsClass("network.syncher", "DataWatcherSerializer");
             DATA_WATCHER_ITEM = ReflectionUtils.nmsClass("network.syncher", "DataWatcher$Item");
             DATA_WATCHER_OBJECT = ReflectionUtils.nmsClass("network.syncher", "DataWatcherObject");
             CRAFT_ENTITY = ReflectionUtils.obcClass("entity.CraftEntity");
@@ -77,7 +87,11 @@ public final class WrapperReflections {
             GET_DATA_WATCHER_ITEMS_METHOD = DATA_WATCHER.getMethod("c");
             GET_DATA_WATCHER_ITEM_OBJECT_FIELD = ReflectionUtils.getField(DATA_WATCHER_ITEM, "a");
             GET_DATA_WATCHER_ITEM_VALUE_FIELD = ReflectionUtils.getField(DATA_WATCHER_ITEM, "b");
-            GET_DATA_WATCHER_OBJECT_SERIALIZER_ID_FIELD = ReflectionUtils.getField(DATA_WATCHER_OBJECT, "a");
+            GET_DATA_WATCHER_OBJECT_INDEX_FIELD = ReflectionUtils.getField(DATA_WATCHER_OBJECT, "a");
+            GET_DATA_WATCHER_OBJECT_SERIALIZER_METHOD = DATA_WATCHER_OBJECT.getMethod("b");
+            GET_DATA_WATCHER_SERIALIZER_TYPE_METHOD = DATA_WATCHER_REGISTRY.getMethod("b", DATA_WATCHER_SERIALIZER);
+            WRITE_DATA_WATCHER_OBJECT_METHOD = DATA_WATCHER_SERIALIZER.getMethod("a", Reflections.PACKET_DATA_SERIALIZER, Object.class);
+            WRITE_DATA_WATCHER_OBJECT_METHOD.setAccessible(true);
 
             GAME_PROFILE_ENTITY_PLAYER_FIELD = ReflectionUtils.getField(ENTITY_HUMAN, "bJ"); // TODO fix for other versions
             GAME_PROFILE_SKULL_META_FIELD = ReflectionUtils.getField(CRAFT_META_SKULL, "profile");
@@ -138,15 +152,25 @@ public final class WrapperReflections {
             Object dataWatcher = DATA_WATCHER_FIELD.get(nmsEntity);
 
             List<Object> items = (List<Object>) GET_DATA_WATCHER_ITEMS_METHOD.invoke(dataWatcher);
-            for (int i = 0; i < items.size(); i++) {
-                Object item = items.get(i);
+            for (Object item : items) {
+                Object dataWatcherSerializer = getSerializer(item);
+                int index = getIndex(item);
 
-                int type = getSerializerId(item);
+                int type = getSerializerId(dataWatcherSerializer);
                 Object value = GET_DATA_WATCHER_ITEM_VALUE_FIELD.get(item);
                 PacketBuffer.Type<?> serializer = Metadata.getSerializer(type);
+                if (serializer == null) continue;
 
-                Metadata.Entry entry = new Metadata.Entry(type, value, serializer);
-                entries.put(i, entry);
+                if (value instanceof Optional<?> optional && optional.isEmpty()) {
+                    value = null;
+                } else if (type != TYPE_BYTE && type != TYPE_VAR_INT && type != TYPE_FLOAT && type != TYPE_STRING
+                        && type != TYPE_BOOLEAN) {
+                    value = readSpecialValue(value, dataWatcherSerializer, serializer);
+                    if (value == null) continue;
+                }
+
+                Entry entry = new Entry(type, value, serializer);
+                entries.put(index, entry);
             }
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -163,13 +187,35 @@ public final class WrapperReflections {
         }
     }
 
-    private static int getSerializerId(Object item) throws IllegalAccessException {
+    private static int getSerializerId(Object serializer) throws Exception {
+        return (int) GET_DATA_WATCHER_SERIALIZER_TYPE_METHOD.invoke(null, serializer);
+    }
+
+    private static int getIndex(Object item) throws Exception {
         Object dataWatcherObject = GET_DATA_WATCHER_ITEM_OBJECT_FIELD.get(item);
-        return (int) GET_DATA_WATCHER_OBJECT_SERIALIZER_ID_FIELD.get(dataWatcherObject);
+        return (int) GET_DATA_WATCHER_OBJECT_INDEX_FIELD.get(dataWatcherObject);
+    }
+
+    private static Object getSerializer(Object item) throws Exception {
+        Object dataWatcherObject = GET_DATA_WATCHER_ITEM_OBJECT_FIELD.get(item);
+        return GET_DATA_WATCHER_OBJECT_SERIALIZER_METHOD.invoke(dataWatcherObject);
     }
 
     private static Object getNMSEntity(@NotNull Entity entity) throws Throwable {
         return GET_ENTITY_HANDLE_METHOD.invoke(entity);
+    }
+
+    private static <T> T readSpecialValue(Object value, Object dataWatcherSerializer, PacketBuffer.Type<T> serializer) throws Exception {
+        ByteBuffer buffer = ByteBuffer.allocateDirect(2_097_152);
+
+        Object packetDataSerializer = Reflections.createPacketDataSerializer(Unpooled.copiedBuffer(buffer));
+        ((ByteBuf) packetDataSerializer).writerIndex(0);
+        ((ByteBuf) packetDataSerializer).readerIndex(0);
+
+        WRITE_DATA_WATCHER_OBJECT_METHOD.invoke(dataWatcherSerializer, packetDataSerializer, value);
+
+        PacketBuffer packetBuffer = new PacketBuffer(buffer);
+        return packetBuffer.read(serializer);
     }
 
     private static PlayerProfileProperty getPropertyFromPropertyObject(@NotNull Object propertyObject) throws IllegalAccessException {
