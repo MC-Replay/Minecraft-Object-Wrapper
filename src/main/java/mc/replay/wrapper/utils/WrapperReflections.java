@@ -157,7 +157,7 @@ public final class WrapperReflections {
     public static int getNewEntityId() {
         try {
             AtomicInteger entityCount = (AtomicInteger) ENTITY_COUNT_FIELD.get(null);
-            return entityCount.getAndIncrement();
+            return entityCount.incrementAndGet();
         } catch (IllegalAccessException exception) {
             throw new RuntimeException(exception);
         }
