@@ -5,7 +5,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import mc.replay.packetlib.data.PlayerProfileProperty;
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.packetlib.network.PacketBuffer;
+import mc.replay.packetlib.network.ReplayByteBuffer;
 import mc.replay.packetlib.utils.ReflectionUtils;
 import mc.replay.packetlib.utils.Reflections;
 import mc.replay.wrapper.data.PlayerProfile;
@@ -158,7 +158,7 @@ public final class WrapperReflections {
 
                 int type = getSerializerId(dataWatcherSerializer);
                 Object value = GET_DATA_WATCHER_ITEM_VALUE_FIELD.get(item);
-                PacketBuffer.Type<?> serializer = Metadata.getSerializer(type);
+                ReplayByteBuffer.Type<?> serializer = Metadata.getSerializer(type);
                 if (serializer == null) continue;
 
                 if (value instanceof Optional<?> optional && optional.isEmpty()) {
@@ -205,7 +205,7 @@ public final class WrapperReflections {
         return GET_ENTITY_HANDLE_METHOD.invoke(entity);
     }
 
-    private static <T> T readSpecialValue(Object value, Object dataWatcherSerializer, PacketBuffer.Type<T> serializer) throws Exception {
+    private static <T> T readSpecialValue(Object value, Object dataWatcherSerializer, ReplayByteBuffer.Type<T> serializer) throws Exception {
         ByteBuffer buffer = ByteBuffer.allocateDirect(2_097_152);
 
         Object packetDataSerializer = Reflections.createPacketDataSerializer(Unpooled.copiedBuffer(buffer));
@@ -214,7 +214,7 @@ public final class WrapperReflections {
 
         WRITE_DATA_WATCHER_OBJECT_METHOD.invoke(dataWatcherSerializer, packetDataSerializer, value);
 
-        PacketBuffer packetBuffer = new PacketBuffer(buffer);
+        ReplayByteBuffer packetBuffer = new ReplayByteBuffer(buffer);
         return packetBuffer.read(serializer);
     }
 
