@@ -2,7 +2,6 @@ package mc.replay.wrapper.entity.metadata;
 
 import mc.replay.packetlib.data.entity.Metadata;
 import mc.replay.packetlib.utils.ProtocolVersion;
-import mc.replay.packetlib.utils.Reflections;
 import mc.replay.wrapper.entity.EntityWrapper;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Pose;
@@ -18,7 +17,7 @@ public class EntityMetadata {
     public static final int MAX_OFFSET = OFFSET + getMaxOffset();
 
     private static int getMaxOffset() {
-        return (Reflections.VERSION.isEqual(ProtocolVersion.MINECRAFT_1_16_5)) ? 7 : 8;
+        return (ProtocolVersion.getServerVersion().isEqual(ProtocolVersion.MINECRAFT_1_16_5)) ? 7 : 8;
     }
 
     private static final byte ON_FIRE_BIT = 0x01;
@@ -98,7 +97,7 @@ public class EntityMetadata {
     }
 
     public void setTickFrozen(int value) {
-        if (Reflections.VERSION.isEqual(ProtocolVersion.MINECRAFT_1_16_5)) return;
+        if (ProtocolVersion.getServerVersion().isEqual(ProtocolVersion.MINECRAFT_1_16_5)) return;
         this.metadata.setIndex(OFFSET + 7, Metadata.VarInt(value));
     }
 
@@ -155,7 +154,7 @@ public class EntityMetadata {
     }
 
     public int getTickFrozen() {
-        if (Reflections.VERSION.isEqual(ProtocolVersion.MINECRAFT_1_16_5)) return 0;
+        if (ProtocolVersion.getServerVersion().isEqual(ProtocolVersion.MINECRAFT_1_16_5)) return 0;
         return this.metadata.getIndex(OFFSET + 7, 0);
     }
 

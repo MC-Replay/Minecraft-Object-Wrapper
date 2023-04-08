@@ -18,6 +18,7 @@ import java.lang.String;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
@@ -39,6 +40,7 @@ public final class WrapperReflections {
     public static Class<?> DATA_WATCHER_ITEM;
     public static Class<?> DATA_WATCHER_OBJECT;
     public static Class<?> CRAFT_ENTITY;
+    public static Class<?> PACKET_DATA_SERIALIZER;
 
     public static MethodHandle GET_ENTITY_HANDLE_METHOD;
 
@@ -62,6 +64,8 @@ public final class WrapperReflections {
     public static Field PROPERTY_VALUE_FIELD;
     public static Field PROPERTY_SIGNATURE_FIELD;
 
+    public static Constructor<?> PACKET_DATA_SERIALIZER_CONSTRUCTOR;
+
     static {
         try {
             MethodHandles.Lookup lookup = MethodHandles.lookup();
@@ -74,33 +78,36 @@ public final class WrapperReflections {
             DATA_WATCHER_ITEM = ReflectionUtils.nmsClass("network.syncher", "DataWatcher$Item");
             DATA_WATCHER_OBJECT = ReflectionUtils.nmsClass("network.syncher", "DataWatcherObject");
             CRAFT_ENTITY = ReflectionUtils.obcClass("entity.CraftEntity");
+            PACKET_DATA_SERIALIZER = ReflectionUtils.nmsClass("network", "PacketDataSerializer");
 
             GET_ENTITY_HANDLE_METHOD = lookup.findVirtual(CRAFT_ENTITY, "getHandle", MethodType.methodType(ENTITY));
 
-            ENTITY_COUNT_FIELD = ReflectionUtils.getField(ENTITY, "entityCount"); // TODO fix for other versions
+            ENTITY_COUNT_FIELD = ReflectionUtils.findFieldEquals(ENTITY, AtomicInteger.class);
 
-            Class<?> CRAFT_META_SKULL = ReflectionUtils.obcClass("inventory.CraftMetaSkull");
-            Class<?> GAME_PROFILE = ReflectionUtils.getClass("com.mojang.authlib.GameProfile");
-            Class<?> PROPERTY = ReflectionUtils.getClass("com.mojang.authlib.properties.Property");
+            Class<?> craftMetaSkull = ReflectionUtils.obcClass("inventory.CraftMetaSkull");
+            Class<?> gameProfile = ReflectionUtils.getClass("com.mojang.authlib.GameProfile");
+            Class<?> property = ReflectionUtils.getClass("com.mojang.authlib.properties.Property");
 
-            DATA_WATCHER_FIELD = ReflectionUtils.getField(ENTITY, "datawatcher"); // TODO fix for other versions
+            DATA_WATCHER_FIELD = ReflectionUtils.findFieldEquals(ENTITY, DATA_WATCHER);
             GET_DATA_WATCHER_ITEMS_METHOD = DATA_WATCHER.getMethod("c");
             GET_DATA_WATCHER_ITEM_OBJECT_FIELD = ReflectionUtils.getField(DATA_WATCHER_ITEM, "a");
             GET_DATA_WATCHER_ITEM_VALUE_FIELD = ReflectionUtils.getField(DATA_WATCHER_ITEM, "b");
             GET_DATA_WATCHER_OBJECT_INDEX_FIELD = ReflectionUtils.getField(DATA_WATCHER_OBJECT, "a");
             GET_DATA_WATCHER_OBJECT_SERIALIZER_METHOD = DATA_WATCHER_OBJECT.getMethod("b");
             GET_DATA_WATCHER_SERIALIZER_TYPE_METHOD = DATA_WATCHER_REGISTRY.getMethod("b", DATA_WATCHER_SERIALIZER);
-            WRITE_DATA_WATCHER_OBJECT_METHOD = DATA_WATCHER_SERIALIZER.getMethod("a", Reflections.PACKET_DATA_SERIALIZER, Object.class);
+            WRITE_DATA_WATCHER_OBJECT_METHOD = DATA_WATCHER_SERIALIZER.getMethod("a", PACKET_DATA_SERIALIZER, Object.class);
             WRITE_DATA_WATCHER_OBJECT_METHOD.setAccessible(true);
 
-            GAME_PROFILE_ENTITY_PLAYER_FIELD = ReflectionUtils.getField(ENTITY_HUMAN, "bJ"); // TODO fix for other versions
-            GAME_PROFILE_SKULL_META_FIELD = ReflectionUtils.getField(CRAFT_META_SKULL, "profile");
-            GAME_PROFILE_UUID_FIELD = ReflectionUtils.getField(GAME_PROFILE, "id");
-            GAME_PROFILE_NAME_FIELD = ReflectionUtils.getField(GAME_PROFILE, "name");
-            GAME_PROFILE_PROPERTIES_FIELD = ReflectionUtils.getField(GAME_PROFILE, "properties");
-            PROPERTY_NAME_FIELD = ReflectionUtils.getField(PROPERTY, "name");
-            PROPERTY_VALUE_FIELD = ReflectionUtils.getField(PROPERTY, "value");
-            PROPERTY_SIGNATURE_FIELD = ReflectionUtils.getField(PROPERTY, "signature");
+            GAME_PROFILE_ENTITY_PLAYER_FIELD = ReflectionUtils.findFieldEquals(ENTITY_HUMAN, gameProfile);
+            GAME_PROFILE_SKULL_META_FIELD = ReflectionUtils.getField(craftMetaSkull, "profile");
+            GAME_PROFILE_UUID_FIELD = ReflectionUtils.getField(gameProfile, "id");
+            GAME_PROFILE_NAME_FIELD = ReflectionUtils.getField(gameProfile, "name");
+            GAME_PROFILE_PROPERTIES_FIELD = ReflectionUtils.getField(gameProfile, "properties");
+            PROPERTY_NAME_FIELD = ReflectionUtils.getField(property, "name");
+            PROPERTY_VALUE_FIELD = ReflectionUtils.getField(property, "value");
+            PROPERTY_SIGNATURE_FIELD = ReflectionUtils.getField(property, "signature");
+
+            PACKET_DATA_SERIALIZER_CONSTRUCTOR = PACKET_DATA_SERIALIZER.getConstructor(ByteBuf.class);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -142,6 +149,10 @@ public final class WrapperReflections {
             throwable.printStackTrace();
             return null;
         }
+    }
+
+    public static Object createPacketDataSerializer(ByteBuf buffer) throws Exception {
+        return PACKET_DATA_SERIALIZER_CONSTRUCTOR.newInstance(buffer);
     }
 
     @SuppressWarnings("unchecked, rawtypes")
@@ -206,15 +217,15 @@ public final class WrapperReflections {
     }
 
     private static <T> T readSpecialValue(Object value, Object dataWatcherSerializer, ReplayByteBuffer.Type<T> serializer) throws Exception {
-        ByteBuffer buffer = ByteBuffer.allocateDirect(2_097_152);
+        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(2_097_152);
 
-        Object packetDataSerializer = Reflections.createPacketDataSerializer(Unpooled.copiedBuffer(buffer));
+        Object packetDataSerializer = createPacketDataSerializer(Unpooled.wrappedBuffer(byteBuffer));
         ((ByteBuf) packetDataSerializer).writerIndex(0);
         ((ByteBuf) packetDataSerializer).readerIndex(0);
 
         WRITE_DATA_WATCHER_OBJECT_METHOD.invoke(dataWatcherSerializer, packetDataSerializer, value);
 
-        ReplayByteBuffer packetBuffer = new ReplayByteBuffer(buffer);
+        ReplayByteBuffer packetBuffer = new ReplayByteBuffer(byteBuffer);
         return packetBuffer.read(serializer);
     }
 
