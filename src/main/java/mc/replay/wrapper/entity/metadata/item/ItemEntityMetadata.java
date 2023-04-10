@@ -18,7 +18,7 @@ public class ItemEntityMetadata extends ItemContainingMetadata implements Object
 
     @Override
     public int getObjectData() {
-        return 1;
+        return 0;
     }
 
     @Override

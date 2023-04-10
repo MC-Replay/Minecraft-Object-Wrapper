@@ -6,10 +6,14 @@ import io.netty.buffer.Unpooled;
 import mc.replay.packetlib.data.PlayerProfileProperty;
 import mc.replay.packetlib.data.entity.Metadata;
 import mc.replay.packetlib.network.ReplayByteBuffer;
+import mc.replay.packetlib.utils.ProtocolVersion;
 import mc.replay.packetlib.utils.ReflectionUtils;
 import mc.replay.packetlib.utils.Reflections;
 import mc.replay.wrapper.data.PlayerProfile;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
@@ -18,12 +22,11 @@ import java.lang.String;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 
 import static mc.replay.packetlib.data.entity.Metadata.*;
 
@@ -41,6 +44,11 @@ public final class WrapperReflections {
     public static Class<?> DATA_WATCHER_OBJECT;
     public static Class<?> CRAFT_ENTITY;
     public static Class<?> PACKET_DATA_SERIALIZER;
+    public static Class<?> MINECRAFT_KEY;
+    public static Class<?> ENTITY_TYPES;
+    public static Class<?> I_REGISTRY;
+    public static Class<?> REGISTRY_BLOCKS;
+    public static Class<?> BUILT_IN_REGISTRIES_1193;
 
     public static MethodHandle GET_ENTITY_HANDLE_METHOD;
 
@@ -66,6 +74,12 @@ public final class WrapperReflections {
 
     public static Constructor<?> PACKET_DATA_SERIALIZER_CONSTRUCTOR;
 
+    public static Object ENTITY_TYPE_REGISTRY;
+    public static Method GET_ENTITY_TYPE_ID_METHOD;
+    public static Method GET_ENTITY_TYPE_NAME_METHOD;
+    public static Method GET_ENTITY_TYPES_FROM_ID_METHOD;
+    public static Method GET_ENTITY_TYPES_FROM_NAME_METHOD;
+
     static {
         try {
             MethodHandles.Lookup lookup = MethodHandles.lookup();
@@ -79,6 +93,13 @@ public final class WrapperReflections {
             DATA_WATCHER_OBJECT = ReflectionUtils.nmsClass("network.syncher", "DataWatcherObject");
             CRAFT_ENTITY = ReflectionUtils.obcClass("entity.CraftEntity");
             PACKET_DATA_SERIALIZER = ReflectionUtils.nmsClass("network", "PacketDataSerializer");
+            MINECRAFT_KEY = ReflectionUtils.nmsClass("resources", "MinecraftKey");
+            ENTITY_TYPES = ReflectionUtils.nmsClass("world.entity", "EntityTypes");
+            I_REGISTRY = ReflectionUtils.nmsClass("core", "IRegistry");
+            REGISTRY_BLOCKS = ReflectionUtils.nmsClass("core", "RegistryBlocks");
+            if (ProtocolVersion.getServerVersion().isHigherOrEqual(ProtocolVersion.MINECRAFT_1_19_3)) {
+                BUILT_IN_REGISTRIES_1193 = ReflectionUtils.nmsClass("core.registries", "BuiltInRegistries");
+            }
 
             GET_ENTITY_HANDLE_METHOD = lookup.findVirtual(CRAFT_ENTITY, "getHandle", MethodType.methodType(ENTITY));
 
@@ -108,6 +129,26 @@ public final class WrapperReflections {
             PROPERTY_SIGNATURE_FIELD = ReflectionUtils.getField(property, "signature");
 
             PACKET_DATA_SERIALIZER_CONSTRUCTOR = PACKET_DATA_SERIALIZER.getConstructor(ByteBuf.class);
+
+            if (ProtocolVersion.getServerVersion().isHigherOrEqual(ProtocolVersion.MINECRAFT_1_19_3)) {
+                ENTITY_TYPE_REGISTRY = findAssignableGenericField(BUILT_IN_REGISTRIES_1193, REGISTRY_BLOCKS, ENTITY_TYPES).get(null);
+            } else {
+                ENTITY_TYPE_REGISTRY = findAssignableGenericField(I_REGISTRY, REGISTRY_BLOCKS, ENTITY_TYPES).get(null);
+            }
+
+            GET_ENTITY_TYPE_ID_METHOD = Arrays.stream(I_REGISTRY.getMethods())
+                    .filter((method) -> method.getName().equals("a") && method.getParameterCount() == 1 && method.getReturnType() == int.class)
+                    .findFirst()
+                    .orElseThrow(NoSuchMethodError::new);
+            GET_ENTITY_TYPE_NAME_METHOD = Arrays.stream(ENTITY_TYPES.getMethods())
+                    .filter((method) -> method.getParameterCount() == 0 && method.getReturnType() == MINECRAFT_KEY)
+                    .findFirst()
+                    .orElseThrow(NoSuchMethodError::new);
+            GET_ENTITY_TYPES_FROM_ID_METHOD = Arrays.stream(I_REGISTRY.getMethods())
+                    .filter((method) -> method.getParameterCount() == 1 && method.getParameterTypes()[0].equals(int.class) && method.getReturnType() == Object.class)
+                    .findFirst()
+                    .orElseThrow(NoSuchMethodError::new);
+            GET_ENTITY_TYPES_FROM_NAME_METHOD = ENTITY_TYPES.getMethod("a", String.class);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -198,6 +239,29 @@ public final class WrapperReflections {
         }
     }
 
+    public static EntityType getEntityTypeById(int entityTypeId) {
+        try {
+            Object entityTypes = GET_ENTITY_TYPES_FROM_ID_METHOD.invoke(ENTITY_TYPE_REGISTRY, entityTypeId);
+            String entityKey = GET_ENTITY_TYPE_NAME_METHOD.invoke(entityTypes).toString();
+            String key = entityKey.contains("/") ? entityKey.split("\\/")[1] : entityKey.split("\\:")[1];
+            NamespacedKey namespacedKey = NamespacedKey.minecraft(key);
+            return Registry.ENTITY_TYPE.get(namespacedKey);
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static int getEntityTypeId(@NotNull EntityType entityType) {
+        try {
+            Object entityTypes = ((Optional<Object>) GET_ENTITY_TYPES_FROM_NAME_METHOD.invoke(null, entityType.getKey().toString()))
+                    .orElseThrow();
+            return (int) GET_ENTITY_TYPE_ID_METHOD.invoke(ENTITY_TYPE_REGISTRY, entityTypes);
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
     private static int getSerializerId(Object serializer) throws Exception {
         return (int) GET_DATA_WATCHER_SERIALIZER_TYPE_METHOD.invoke(null, serializer);
     }
@@ -217,14 +281,13 @@ public final class WrapperReflections {
     }
 
     private static <T> T readSpecialValue(Object value, Object dataWatcherSerializer, ReplayByteBuffer.Type<T> serializer) throws Exception {
-        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(2_097_152);
-
-        Object packetDataSerializer = createPacketDataSerializer(Unpooled.wrappedBuffer(byteBuffer));
+        Object packetDataSerializer = createPacketDataSerializer(Unpooled.buffer());
         ((ByteBuf) packetDataSerializer).writerIndex(0);
         ((ByteBuf) packetDataSerializer).readerIndex(0);
 
         WRITE_DATA_WATCHER_OBJECT_METHOD.invoke(dataWatcherSerializer, packetDataSerializer, value);
 
+        ByteBuffer byteBuffer = ByteBuffer.wrap(((ByteBuf) packetDataSerializer).array());
         ReplayByteBuffer packetBuffer = new ReplayByteBuffer(byteBuffer);
         return packetBuffer.read(serializer);
     }
@@ -234,5 +297,29 @@ public final class WrapperReflections {
         String value = (String) PROPERTY_VALUE_FIELD.get(propertyObject);
         String signature = (String) PROPERTY_SIGNATURE_FIELD.get(propertyObject);
         return new PlayerProfileProperty(name, value, signature);
+    }
+
+    private static Field findField(Class<?> instance, Predicate<Field> predicate) throws NoSuchFieldException {
+        return Arrays.stream(instance.getDeclaredFields())
+                .filter(predicate)
+                .findFirst()
+                .orElseThrow(NoSuchFieldException::new);
+    }
+
+    private static Field findAssignableGenericField(Class<?> instance, Class<?> assignableClass, Type... argumentTypes) throws NoSuchFieldException {
+        return findField(instance, (field) -> {
+            if (!assignableClass.isAssignableFrom(field.getType())) return false;
+            if (!(field.getGenericType() instanceof ParameterizedType type)) return false;
+
+            for (int i = 0; i < argumentTypes.length; i++) {
+                if (type.getActualTypeArguments().length <= i) break;
+
+                if (!type.getActualTypeArguments()[i].getTypeName().startsWith(argumentTypes[i].getTypeName())) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
     }
 }

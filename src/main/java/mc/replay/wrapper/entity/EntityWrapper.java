@@ -17,7 +17,7 @@ public class EntityWrapper {
     protected int id;
     protected final UUID uuid;
 
-    protected final EntityType entityType;
+    protected final EntityTypeWrapper entityType;
 
     protected Metadata metadata = new Metadata();
     protected EntityMetadata entityMetadata;
@@ -29,7 +29,7 @@ public class EntityWrapper {
     public EntityWrapper(@NotNull EntityType entityType, int entityId, @NotNull UUID uuid) {
         this.id = entityId;
         this.uuid = uuid;
-        this.entityType = entityType;
+        this.entityType = new EntityTypeWrapper(entityType);
 
         this.position = new Pos(0, 0, 0, 0, 0);
         this.velocity = new Vector(0, 0, 0);
@@ -58,8 +58,12 @@ public class EntityWrapper {
         return this.uuid;
     }
 
-    public @NotNull EntityType getType() {
+    public @NotNull EntityTypeWrapper getType() {
         return this.entityType;
+    }
+
+    public @NotNull EntityType getBukkitType() {
+        return this.entityType.getBukkitType();
     }
 
     public EntityMetadata getMetadata() {
