@@ -1,18 +1,16 @@
 package mc.replay.wrapper.entity.metadata.monster.zombie;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.villager.VillagerMetadata;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ZombieVillagerMetadata extends ZombieMetadata {
 
     public static final int OFFSET = ZombieMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
-    public ZombieVillagerMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public ZombieVillagerMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setConverting(boolean value) {

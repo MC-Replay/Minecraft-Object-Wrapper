@@ -14,8 +14,8 @@ public class WitherMetadata extends MonsterMetadata {
     private EntityWrapper leftHead;
     private EntityWrapper rightHead;
 
-    public WitherMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public WitherMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setCenterHead(@Nullable EntityWrapper value) {

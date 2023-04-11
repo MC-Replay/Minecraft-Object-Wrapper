@@ -1,10 +1,8 @@
 package mc.replay.wrapper.entity.metadata.animal.tameable;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.animal.AnimalMetadata;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -16,8 +14,8 @@ public class TameableAnimalMetadata extends AnimalMetadata {
     private static final byte SITTING_BIT = 0x01;
     private static final byte TAMED_BIT = 0x04;
 
-    protected TameableAnimalMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    protected TameableAnimalMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setSitting(boolean value) {

@@ -1,17 +1,15 @@
 package mc.replay.wrapper.entity.metadata.monster;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class CreeperMetadata extends MonsterMetadata {
 
     public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 3;
 
-    public CreeperMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public CreeperMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setState(@NotNull State value) {

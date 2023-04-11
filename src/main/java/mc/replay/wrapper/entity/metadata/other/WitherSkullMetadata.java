@@ -15,8 +15,8 @@ public class WitherSkullMetadata extends EntityMetadata implements ObjectDataPro
 
     private EntityWrapper shooter;
 
-    public WitherSkullMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public WitherSkullMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setInvulnerable(boolean value) {

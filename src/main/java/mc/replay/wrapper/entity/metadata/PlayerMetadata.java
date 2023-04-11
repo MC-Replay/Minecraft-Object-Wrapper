@@ -2,7 +2,6 @@ package mc.replay.wrapper.entity.metadata;
 
 import com.github.steveice10.opennbt.tag.builtin.Tag;
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,8 +18,8 @@ public class PlayerMetadata extends LivingEntityMetadata {
     private final static byte RIGHT_LEG_BIT = 0x20;
     private final static byte HAT_BIT = 0x40;
 
-    public PlayerMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public PlayerMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setAdditionalHearts(float value) {

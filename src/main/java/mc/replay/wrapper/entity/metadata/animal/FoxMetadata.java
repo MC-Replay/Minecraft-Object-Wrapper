@@ -20,8 +20,8 @@ public class FoxMetadata extends AnimalMetadata {
     private static final byte FACEPLANTED_BIT = 0x40;
     private static final byte DEFENDING_BIT = (byte) 0x80;
 
-    public FoxMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public FoxMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setType(@NotNull Type type) {

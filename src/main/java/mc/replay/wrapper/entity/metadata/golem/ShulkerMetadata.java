@@ -1,7 +1,6 @@
 package mc.replay.wrapper.entity.metadata.golem;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.bukkit.block.BlockFace;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -12,8 +11,8 @@ public class ShulkerMetadata extends AbstractGolemMetadata {
     public static final int OFFSET = AbstractGolemMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 4;
 
-    public ShulkerMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public ShulkerMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setAttachFace(@NotNull BlockFace value) {

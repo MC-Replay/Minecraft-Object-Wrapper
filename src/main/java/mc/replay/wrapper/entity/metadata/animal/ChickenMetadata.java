@@ -10,7 +10,7 @@ public class ChickenMetadata extends AnimalMetadata {
     public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 0;
 
-    public ChickenMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public ChickenMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 }

@@ -10,8 +10,8 @@ public class EndermanMetadata extends MonsterMetadata {
     public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 3;
 
-    public EndermanMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public EndermanMetadata( @NotNull Metadata metadata) {
+        super( metadata);
     }
 
     public void setCarriedBlockId(@Nullable Integer value) {

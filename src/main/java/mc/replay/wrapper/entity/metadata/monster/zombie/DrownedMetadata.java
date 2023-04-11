@@ -1,16 +1,14 @@
 package mc.replay.wrapper.entity.metadata.monster.zombie;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class DrownedMetadata extends ZombieMetadata {
 
     public static final int OFFSET = ZombieMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 0;
 
-    public DrownedMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public DrownedMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 }

@@ -1,17 +1,15 @@
 package mc.replay.wrapper.entity.metadata.water;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class GlowSquidMetadata extends WaterAnimalMetadata {
 
     public static final int OFFSET = WaterAnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
-    public GlowSquidMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public GlowSquidMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setDarkTicksRemaining(int value) {

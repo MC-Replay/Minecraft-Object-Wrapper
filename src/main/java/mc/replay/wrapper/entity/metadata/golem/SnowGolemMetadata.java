@@ -1,9 +1,7 @@
 package mc.replay.wrapper.entity.metadata.golem;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class SnowGolemMetadata extends AbstractGolemMetadata {
 
@@ -12,8 +10,8 @@ public class SnowGolemMetadata extends AbstractGolemMetadata {
 
     private static final byte PLAYER_CREATED_BIT = 0x01;
 
-    public SnowGolemMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public SnowGolemMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setHasPumpkinHat(boolean value) {

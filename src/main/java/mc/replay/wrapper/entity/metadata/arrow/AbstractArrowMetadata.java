@@ -1,10 +1,8 @@
 package mc.replay.wrapper.entity.metadata.arrow;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class AbstractArrowMetadata extends EntityMetadata {
 
@@ -14,8 +12,8 @@ public class AbstractArrowMetadata extends EntityMetadata {
     private static final byte CRITICAL_BIT = 0x01;
     private static final byte NO_CLIP_BIT = 0x02;
 
-    protected AbstractArrowMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    protected AbstractArrowMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setCritical(boolean value) {

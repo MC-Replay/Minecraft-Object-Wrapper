@@ -15,8 +15,8 @@ public class FishingHookMetadata extends EntityMetadata implements ObjectDataPro
     private EntityWrapper hooked;
     private EntityWrapper owner;
 
-    public FishingHookMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public FishingHookMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setHookedEntity(@Nullable EntityWrapper value) {

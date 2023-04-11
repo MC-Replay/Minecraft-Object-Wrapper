@@ -2,7 +2,6 @@ package mc.replay.wrapper.entity.metadata;
 
 import mc.replay.packetlib.data.entity.Metadata;
 import mc.replay.packetlib.data.entity.PlayerHand;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,8 +15,8 @@ public class LivingEntityMetadata extends EntityMetadata {
     private static final byte ACTIVE_HAND_BIT = 0x02;
     private static final byte IS_IN_SPIN_ATTACK_BIT = 0x04;
 
-    public LivingEntityMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public LivingEntityMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setHandActive(boolean value) {

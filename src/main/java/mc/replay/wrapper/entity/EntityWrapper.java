@@ -34,7 +34,7 @@ public class EntityWrapper {
         this.position = new Pos(0, 0, 0, 0, 0);
         this.velocity = new Vector(0, 0, 0);
 
-        this.entityMetadata = EntityTypes.createMetadata(entityType, this, this.metadata);
+        this.entityMetadata = EntityTypes.createMetadata(entityType, this.metadata);
     }
 
     public EntityWrapper(@NotNull EntityType entityType, @NotNull UUID uuid) {

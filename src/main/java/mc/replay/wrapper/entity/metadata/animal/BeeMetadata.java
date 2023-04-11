@@ -15,8 +15,8 @@ public class BeeMetadata extends AnimalMetadata {
     private static final byte HAS_STUNG_BIT = 0x04;
     private static final byte HAS_NECTAR_BIT = 0x08;
 
-    public BeeMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public BeeMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setAngry(boolean value) {

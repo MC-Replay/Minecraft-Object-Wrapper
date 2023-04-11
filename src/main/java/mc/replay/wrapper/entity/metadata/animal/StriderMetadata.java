@@ -1,17 +1,15 @@
 package mc.replay.wrapper.entity.metadata.animal;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class StriderMetadata extends AnimalMetadata {
 
     public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 3;
 
-    public StriderMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public StriderMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setTimeToBoost(int value) {

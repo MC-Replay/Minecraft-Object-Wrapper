@@ -1,13 +1,11 @@
 package mc.replay.wrapper.entity.metadata.other;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import mc.replay.wrapper.entity.metadata.ObjectDataProvider;
 import org.bukkit.Material;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class FallingBlockMetadata extends EntityMetadata implements ObjectDataProvider {
 
@@ -17,8 +15,8 @@ public class FallingBlockMetadata extends EntityMetadata implements ObjectDataPr
     // TODO change material to block object with stateId and type
     private Material material = Material.STONE;
 
-    public FallingBlockMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public FallingBlockMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setSpawnPosition(@NotNull Vector value) {

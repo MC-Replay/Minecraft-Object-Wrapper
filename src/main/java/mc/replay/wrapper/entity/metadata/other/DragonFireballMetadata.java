@@ -15,8 +15,8 @@ public class DragonFireballMetadata extends EntityMetadata implements ObjectData
 
     private EntityWrapper shooter;
 
-    public DragonFireballMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public DragonFireballMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     @Override

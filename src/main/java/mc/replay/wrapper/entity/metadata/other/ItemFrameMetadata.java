@@ -2,13 +2,11 @@ package mc.replay.wrapper.entity.metadata.other;
 
 import mc.replay.packetlib.data.Item;
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import mc.replay.wrapper.entity.metadata.ObjectDataProvider;
 import mc.replay.wrapper.item.ItemWrapper;
 import org.bukkit.Rotation;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ItemFrameMetadata extends EntityMetadata implements ObjectDataProvider {
 
@@ -17,8 +15,8 @@ public class ItemFrameMetadata extends EntityMetadata implements ObjectDataProvi
 
     private Orientation orientation = Orientation.DOWN;
 
-    public ItemFrameMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public ItemFrameMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setItem(@NotNull ItemWrapper value) {

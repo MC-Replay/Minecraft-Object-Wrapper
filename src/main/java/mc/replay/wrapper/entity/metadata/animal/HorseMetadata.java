@@ -10,8 +10,8 @@ public class HorseMetadata extends AbstractHorseMetadata {
     public static final int OFFSET = AbstractHorseMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
-    public HorseMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public HorseMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setVariant(@NotNull Variant variant) {

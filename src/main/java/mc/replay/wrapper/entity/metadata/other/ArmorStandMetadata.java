@@ -1,11 +1,9 @@
 package mc.replay.wrapper.entity.metadata.other;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.LivingEntityMetadata;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ArmorStandMetadata extends LivingEntityMetadata {
 
@@ -17,8 +15,8 @@ public class ArmorStandMetadata extends LivingEntityMetadata {
     private static final byte HAS_NO_BASE_PLATE_BIT = 0x08;
     private static final byte IS_MARKER_BIT = 0x10;
 
-    public ArmorStandMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public ArmorStandMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setSmall(boolean value) {

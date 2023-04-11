@@ -10,8 +10,8 @@ public class OcelotMetadata extends AnimalMetadata {
     public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
-    public OcelotMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public OcelotMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setTrusting(boolean value) {

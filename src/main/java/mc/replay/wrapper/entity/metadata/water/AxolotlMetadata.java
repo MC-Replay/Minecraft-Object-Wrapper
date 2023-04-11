@@ -1,17 +1,15 @@
 package mc.replay.wrapper.entity.metadata.water;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class AxolotlMetadata extends WaterAnimalMetadata {
 
     public static final int OFFSET = WaterAnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 3;
 
-    public AxolotlMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public AxolotlMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setVariant(@NotNull Variant variant) {

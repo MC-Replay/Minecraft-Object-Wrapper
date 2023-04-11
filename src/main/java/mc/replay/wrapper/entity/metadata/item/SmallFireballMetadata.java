@@ -15,8 +15,8 @@ public class SmallFireballMetadata extends ItemContainingMetadata implements Obj
 
     private EntityWrapper shooter;
 
-    public SmallFireballMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata, Material.FIRE_CHARGE);
+    public SmallFireballMetadata(@NotNull Metadata metadata) {
+        super(metadata, Material.FIRE_CHARGE);
     }
 
     @Override

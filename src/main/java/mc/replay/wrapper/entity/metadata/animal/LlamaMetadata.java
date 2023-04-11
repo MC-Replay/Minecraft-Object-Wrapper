@@ -10,8 +10,8 @@ public class LlamaMetadata extends ChestedHorseMetadata {
     public static final int OFFSET = ChestedHorseMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 3;
 
-    public LlamaMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public LlamaMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setStrength(int value) {

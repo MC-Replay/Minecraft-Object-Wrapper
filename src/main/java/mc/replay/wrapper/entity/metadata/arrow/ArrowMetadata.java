@@ -14,8 +14,8 @@ public class ArrowMetadata extends AbstractArrowMetadata implements ObjectDataPr
 
     private EntityWrapper shooter;
 
-    public ArrowMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public ArrowMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setColor(int value) {

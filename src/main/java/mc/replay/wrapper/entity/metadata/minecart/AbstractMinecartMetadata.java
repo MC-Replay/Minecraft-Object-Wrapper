@@ -1,19 +1,17 @@
 package mc.replay.wrapper.entity.metadata.minecart;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import mc.replay.wrapper.entity.metadata.ObjectDataProvider;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractMinecartMetadata extends EntityMetadata implements ObjectDataProvider {
 
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 6;
 
-    protected AbstractMinecartMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    protected AbstractMinecartMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setShakingPower(int value) {

@@ -10,7 +10,7 @@ public class ZombieHorseMetadata extends AbstractHorseMetadata {
     public static final int OFFSET = AbstractHorseMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 0;
 
-    public ZombieHorseMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public ZombieHorseMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 }

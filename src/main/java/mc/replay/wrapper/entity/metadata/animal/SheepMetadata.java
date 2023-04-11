@@ -13,8 +13,8 @@ public class SheepMetadata extends AnimalMetadata {
     private static final byte COLOR_BITS = 0x0F;
     private static final byte SHEARED_BIT = 0x10;
 
-    public SheepMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public SheepMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setColor(byte color) {

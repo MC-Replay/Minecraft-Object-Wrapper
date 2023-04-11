@@ -1,10 +1,8 @@
 package mc.replay.wrapper.entity.metadata.other;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ExperienceOrbMetadata extends EntityMetadata {
 
@@ -13,8 +11,8 @@ public class ExperienceOrbMetadata extends EntityMetadata {
 
     private int count = 1;
 
-    public ExperienceOrbMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public ExperienceOrbMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setCount(int value) {

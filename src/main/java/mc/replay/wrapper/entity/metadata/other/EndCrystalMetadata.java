@@ -1,7 +1,6 @@
 package mc.replay.wrapper.entity.metadata.other;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
@@ -12,8 +11,8 @@ public class EndCrystalMetadata extends EntityMetadata {
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
-    public EndCrystalMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public EndCrystalMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setBeamTarget(@Nullable Vector value) {

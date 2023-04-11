@@ -10,7 +10,7 @@ public class DonkeyMetadata extends ChestedHorseMetadata {
     public static final int OFFSET = ChestedHorseMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 0;
 
-    public DonkeyMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public DonkeyMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 }

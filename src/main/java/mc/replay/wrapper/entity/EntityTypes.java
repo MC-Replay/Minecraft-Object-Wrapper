@@ -38,20 +38,20 @@ import mc.replay.wrapper.entity.metadata.water.fish.TropicalFishMetadata;
 import org.bukkit.entity.EntityType;
 
 import java.util.Map;
-import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import static java.util.Map.entry;
 
 public final class EntityTypes {
 
-    static final Map<String, BiFunction<EntityWrapper, Metadata, EntityMetadata>> ENTITY_META_SUPPLIER = createMetadataMap();
+    static final Map<String, Function<Metadata, EntityMetadata>> ENTITY_META_SUPPLIER = createMetadataMap();
 
-    static EntityMetadata createMetadata(EntityType entityType, EntityWrapper entity, Metadata metadata) {
-        return ENTITY_META_SUPPLIER.get(entityType.getKey().toString()).apply(entity, metadata);
+    public static EntityMetadata createMetadata(EntityType entityType, Metadata metadata) {
+        return ENTITY_META_SUPPLIER.get(entityType.getKey().toString()).apply(metadata);
     }
 
-    private static Map<String, BiFunction<EntityWrapper, Metadata, EntityMetadata>> createMetadataMap() {
-        return Map.<String, BiFunction<EntityWrapper, Metadata, EntityMetadata>>ofEntries(
+    private static Map<String, Function<Metadata, EntityMetadata>> createMetadataMap() {
+        return Map.<String, Function<Metadata, EntityMetadata>>ofEntries(
                 entry("minecraft:allay", EntityMetadata::new), // TODO dedicated metadata
                 entry("minecraft:area_effect_cloud", AreaEffectCloudMetadata::new),
                 entry("minecraft:armor_stand", ArmorStandMetadata::new),

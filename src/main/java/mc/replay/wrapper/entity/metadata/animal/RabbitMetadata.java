@@ -10,8 +10,8 @@ public class RabbitMetadata extends AnimalMetadata {
     public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
-    public RabbitMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public RabbitMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setType(@NotNull Type value) {

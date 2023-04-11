@@ -15,8 +15,8 @@ public class PandaMetadata extends AnimalMetadata {
     private static final byte SITTING_BIT = 0x08;
     private static final byte ON_BACK_BIT = 0x10;
 
-    public PandaMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public PandaMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setBreedTimer(int value) {

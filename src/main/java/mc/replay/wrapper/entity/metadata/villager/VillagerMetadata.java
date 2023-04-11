@@ -1,17 +1,15 @@
 package mc.replay.wrapper.entity.metadata.villager;
 
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class VillagerMetadata extends AbstractVillagerMetadata {
 
     public static final int OFFSET = AbstractVillagerMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
-    public VillagerMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public VillagerMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setVillagerData(@NotNull VillagerData value) {

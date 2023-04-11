@@ -2,13 +2,10 @@ package mc.replay.wrapper.entity.metadata;
 
 import mc.replay.packetlib.data.entity.Metadata;
 import mc.replay.packetlib.utils.ProtocolVersion;
-import mc.replay.wrapper.entity.EntityWrapper;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Pose;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.lang.ref.WeakReference;
 import java.util.Map;
 
 public class EntityMetadata {
@@ -28,11 +25,9 @@ public class EntityMetadata {
     private static final byte HAS_GLOWING_EFFECT_BIT = 0x40;
     private static final byte FLYING_WITH_ELYTRA_BIT = (byte) 0x80;
 
-    private final WeakReference<EntityWrapper> entityRef;
     protected final Metadata metadata;
 
-    public EntityMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        this.entityRef = new WeakReference<>(entity);
+    public EntityMetadata(@NotNull Metadata metadata) {
         this.metadata = metadata;
     }
 

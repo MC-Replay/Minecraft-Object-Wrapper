@@ -15,8 +15,8 @@ public class FireballMetadata extends ItemContainingMetadata implements ObjectDa
 
     private EntityWrapper shooter;
 
-    public FireballMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata, Material.AIR);
+    public FireballMetadata(@NotNull Metadata metadata) {
+        super(metadata, Material.AIR);
     }
 
     @Override

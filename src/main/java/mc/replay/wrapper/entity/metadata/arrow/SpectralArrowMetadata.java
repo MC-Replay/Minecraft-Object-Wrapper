@@ -14,8 +14,8 @@ public class SpectralArrowMetadata extends AbstractArrowMetadata implements Obje
 
     private EntityWrapper shooter;
 
-    public SpectralArrowMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public SpectralArrowMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     @Override

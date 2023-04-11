@@ -2,11 +2,9 @@ package mc.replay.wrapper.entity.metadata.other;
 
 import com.google.common.base.Preconditions;
 import mc.replay.packetlib.data.entity.Metadata;
-import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import org.bukkit.block.BlockFace;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class PaintingMetadata extends EntityMetadata {
 
@@ -16,8 +14,8 @@ public class PaintingMetadata extends EntityMetadata {
     private Motive motive = Motive.KEBAB;
     private BlockFace direction = BlockFace.SOUTH;
 
-    public PaintingMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public PaintingMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setMotive(@NotNull Motive value) {

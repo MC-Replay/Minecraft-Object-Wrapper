@@ -12,8 +12,8 @@ public class GuardianMetadata extends MonsterMetadata {
 
     private EntityWrapper target;
 
-    public GuardianMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public GuardianMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setRetractingSpikes(boolean value) {

@@ -19,8 +19,8 @@ public class AbstractHorseMetadata extends AnimalMetadata {
     private static final byte REARING_BIT = 0x20;
     private static final byte MOUTH_OPEN_BIT = 0x40;
 
-    protected AbstractHorseMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    protected AbstractHorseMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setTamed(boolean value) {

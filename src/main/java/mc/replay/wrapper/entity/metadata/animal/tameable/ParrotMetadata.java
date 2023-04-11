@@ -10,8 +10,8 @@ public class ParrotMetadata extends TameableAnimalMetadata {
     public static final int OFFSET = TameableAnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
-    public ParrotMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public ParrotMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setColor(@NotNull Color value) {

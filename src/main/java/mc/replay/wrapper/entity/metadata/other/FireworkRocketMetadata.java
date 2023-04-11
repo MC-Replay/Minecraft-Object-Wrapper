@@ -16,8 +16,8 @@ public class FireworkRocketMetadata extends EntityMetadata implements Projectile
 
     private EntityWrapper shooter;
 
-    public FireworkRocketMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public FireworkRocketMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setFireworkInfo(@NotNull ItemWrapper value) {

@@ -11,8 +11,8 @@ public class TurtleMetadata extends AnimalMetadata {
     public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 6;
 
-    public TurtleMetadata(@Nullable EntityWrapper entity, @NotNull Metadata metadata) {
-        super(entity, metadata);
+    public TurtleMetadata(@NotNull Metadata metadata) {
+        super(metadata);
     }
 
     public void setHomePosition(@NotNull Vector value) {
