@@ -21,30 +21,27 @@ final class SkullMetaDeserializer {
 
     static @Nullable Tag readSkullMeta(@NotNull SkullMeta skullMeta) {
         PlayerProfile playerProfile = WrapperReflections.getGameProfileFromSkullMeta(skullMeta);
-        if (playerProfile == null) return null;
+        if (playerProfile == null || playerProfile.properties().isEmpty()) return null;
 
         CompoundTag skullOwnerTag = new CompoundTag("SkullOwner");
         skullOwnerTag.put(new StringTag("Name", playerProfile.name()));
         skullOwnerTag.put(NBTUtils.uuidToTag("Id", playerProfile.uuid()));
 
-        if (!playerProfile.properties().isEmpty()) {
-            CompoundTag propertiesTag = new CompoundTag("Properties");
+        CompoundTag propertiesTag = new CompoundTag("Properties");
+        for (Map.Entry<String, PlayerProfileProperty> entry : playerProfile.properties().entrySet()) {
+            ListTag listTag = new ListTag(entry.getKey());
 
-            for (Map.Entry<String, PlayerProfileProperty> entry : playerProfile.properties().entrySet()) {
-                ListTag listTag = new ListTag(entry.getKey());
-
-                CompoundTag propertyTag = new CompoundTag("");
-                propertyTag.put(new StringTag("Value", entry.getValue().value()));
-                if (entry.getValue().signature() != null) {
-                    propertyTag.put(new StringTag("Signature", entry.getValue().signature()));
-                }
-
-                listTag.add(propertyTag);
-                propertiesTag.put(listTag);
+            CompoundTag propertyTag = new CompoundTag("");
+            propertyTag.put(new StringTag("Value", entry.getValue().value()));
+            if (entry.getValue().signature() != null) {
+                propertyTag.put(new StringTag("Signature", entry.getValue().signature()));
             }
 
-            skullOwnerTag.put(propertiesTag);
+            listTag.add(propertyTag);
+            propertiesTag.put(listTag);
         }
+
+        skullOwnerTag.put(propertiesTag);
 
         return skullOwnerTag;
     }

@@ -84,8 +84,6 @@ public final class ItemDeserializer {
             //            tag = readCompassMeta(compassMeta);
         } else if (meta instanceof CrossbowMeta crossbowMeta) {
             //            tag = readCrossbowMeta(crossbowMeta);
-        } else if (meta instanceof Damageable damageable) {
-            //            tag = readDamageable(damageable);
         } else if (meta instanceof EnchantmentStorageMeta enchantmentStorageMeta) {
             //            tag = readEnchantmentStorageMeta(enchantmentStorageMeta);
         } else if (meta instanceof FireworkEffectMeta fireworkEffectMeta) {
@@ -98,8 +96,6 @@ public final class ItemDeserializer {
             //            tag = readMapMeta(mapMeta);
         } else if (meta instanceof PotionMeta potionMeta) {
             //            tag = readPotionMeta(potionMeta);
-        } else if (meta instanceof Repairable repairable) {
-            //            tag = readRepairable(repairable);
         } else if (meta instanceof SkullMeta skullMeta) {
             tag = SkullMetaDeserializer.readSkullMeta(skullMeta);
         } else if (meta instanceof SpawnEggMeta spawnEggMeta) {
