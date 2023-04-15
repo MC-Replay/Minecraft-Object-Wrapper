@@ -9,6 +9,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,6 +27,8 @@ public class EntityWrapper {
     protected Pos position;
 
     protected Vector velocity;
+
+    protected boolean isPassenger = false;
 
     public EntityWrapper(@NotNull EntityType entityType, int entityId, @NotNull UUID uuid) {
         this.id = entityId;
@@ -78,6 +82,10 @@ public class EntityWrapper {
         return this.velocity;
     }
 
+    public boolean isPassenger() {
+        return this.isPassenger;
+    }
+
     public void setPosition(@NotNull Pos position) {
         this.position = position;
     }
@@ -92,6 +100,10 @@ public class EntityWrapper {
 
     public void setVelocity(@NotNull Vector velocity) {
         this.velocity = velocity;
+    }
+
+    public void setIsPassenger(boolean isPassenger) {
+        this.isPassenger = isPassenger;
     }
 
     public final <T extends EntityMetadata> @NotNull T getMetaData(@NotNull Class<T> clazz) {

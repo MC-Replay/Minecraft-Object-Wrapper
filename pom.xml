@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.github.MC-Replay</groupId>
             <artifactId>PacketLib</artifactId>
-            <version>main-SNAPSHOT</version>
+            <version>6c9de21ffa</version>
         </dependency>
 
         <dependency>
