@@ -73,6 +73,8 @@ public final class WrapperReflections {
     public static Field PROPERTY_SIGNATURE_FIELD;
 
     public static Constructor<?> PACKET_DATA_SERIALIZER_CONSTRUCTOR;
+    public static Constructor<?> GAME_PROFILE_CONSTRUCTOR;
+    public static Constructor<?> GAME_PROFILE_PROPERTY_CONSTRUCTOR;
 
     public static Object ENTITY_TYPE_REGISTRY;
     public static Method GET_ENTITY_TYPE_ID_METHOD;
@@ -129,6 +131,8 @@ public final class WrapperReflections {
             PROPERTY_SIGNATURE_FIELD = ReflectionUtils.getField(property, "signature");
 
             PACKET_DATA_SERIALIZER_CONSTRUCTOR = PACKET_DATA_SERIALIZER.getConstructor(ByteBuf.class);
+            GAME_PROFILE_CONSTRUCTOR = gameProfile.getConstructor(UUID.class, String.class);
+            GAME_PROFILE_PROPERTY_CONSTRUCTOR = property.getConstructor(String.class, String.class, String.class);
 
             if (ProtocolVersion.getServerVersion().isHigherOrEqual(ProtocolVersion.MINECRAFT_1_19_3)) {
                 ENTITY_TYPE_REGISTRY = findAssignableGenericField(BUILT_IN_REGISTRIES_1193, REGISTRY_BLOCKS, ENTITY_TYPES).get(null);
@@ -155,7 +159,7 @@ public final class WrapperReflections {
     }
 
     @SuppressWarnings("unchecked")
-    public static PlayerProfile getGameProfile(@NotNull Object gameProfile) {
+    public static PlayerProfile getPlayerProfile(@NotNull Object gameProfile) {
         try {
             UUID uuid = (UUID) GAME_PROFILE_UUID_FIELD.get(gameProfile);
             String name = (String) GAME_PROFILE_NAME_FIELD.get(gameProfile);
@@ -173,19 +177,43 @@ public final class WrapperReflections {
         }
     }
 
-    public static PlayerProfile getGameProfileFromSkullMeta(@NotNull SkullMeta skullMeta) {
+    @SuppressWarnings("unchecked")
+    public static Object getGameProfile(@NotNull PlayerProfile profile) {
         try {
-            return getGameProfile(GAME_PROFILE_SKULL_META_FIELD.get(skullMeta));
+            Object gameProfile = GAME_PROFILE_CONSTRUCTOR.newInstance(profile.uuid(), profile.name());
+            ForwardingMultimap<String, Object> properties = (ForwardingMultimap<String, Object>) GAME_PROFILE_PROPERTIES_FIELD.get(gameProfile);
+            for (PlayerProfileProperty property : profile.properties().values()) {
+                properties.put(property.name(), getPropertyObjectFromProperty(property));
+            }
+            return gameProfile;
         } catch (Exception exception) {
             exception.printStackTrace();
             return null;
         }
     }
 
-    public static PlayerProfile getGameProfileFromPlayer(@NotNull Player player) {
+    public static PlayerProfile getPlayerProfileFromSkullMeta(@NotNull SkullMeta skullMeta) {
+        try {
+            return getPlayerProfile(GAME_PROFILE_SKULL_META_FIELD.get(skullMeta));
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void setPlayerProfileToSkullMeta(@NotNull SkullMeta meta, @NotNull PlayerProfile profile) {
+        try {
+            Object gameProfile = getGameProfile(profile);
+            GAME_PROFILE_SKULL_META_FIELD.set(meta, gameProfile);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public static PlayerProfile getPlayerProfileFromPlayer(@NotNull Player player) {
         try {
             Object entityPlayer = Reflections.getEntityPlayer(player);
-            return getGameProfile(GAME_PROFILE_ENTITY_PLAYER_FIELD.get(entityPlayer));
+            return getPlayerProfile(GAME_PROFILE_ENTITY_PLAYER_FIELD.get(entityPlayer));
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;
@@ -297,6 +325,10 @@ public final class WrapperReflections {
         String value = (String) PROPERTY_VALUE_FIELD.get(propertyObject);
         String signature = (String) PROPERTY_SIGNATURE_FIELD.get(propertyObject);
         return new PlayerProfileProperty(name, value, signature);
+    }
+
+    private static Object getPropertyObjectFromProperty(@NotNull PlayerProfileProperty property) throws InvocationTargetException, InstantiationException, IllegalAccessException {
+        return GAME_PROFILE_PROPERTY_CONSTRUCTOR.newInstance(property.name(), property.value(), property.signature());
     }
 
     private static Field findField(Class<?> instance, Predicate<Field> predicate) throws NoSuchFieldException {

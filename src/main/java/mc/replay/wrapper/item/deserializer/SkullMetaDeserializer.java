@@ -20,7 +20,7 @@ final class SkullMetaDeserializer {
     }
 
     static @Nullable Tag readSkullMeta(@NotNull SkullMeta skullMeta) {
-        PlayerProfile playerProfile = WrapperReflections.getGameProfileFromSkullMeta(skullMeta);
+        PlayerProfile playerProfile = WrapperReflections.getPlayerProfileFromSkullMeta(skullMeta);
         if (playerProfile == null || playerProfile.properties().isEmpty()) return null;
 
         CompoundTag skullOwnerTag = new CompoundTag("SkullOwner");

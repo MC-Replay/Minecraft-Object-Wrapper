@@ -11,7 +11,7 @@ import java.util.UUID;
 public record PlayerProfile(UUID uuid, String name, Map<String, PlayerProfileProperty> properties) {
 
     public static @NotNull PlayerProfile fromPlayer(@NotNull Player player) {
-        PlayerProfile profile = WrapperReflections.getGameProfileFromPlayer(player);
+        PlayerProfile profile = WrapperReflections.getPlayerProfileFromPlayer(player);
         if (profile == null) throw new IllegalStateException("Couldn't get profile from player");
         return profile;
     }
