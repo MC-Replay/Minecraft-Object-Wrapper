@@ -5,8 +5,11 @@ import com.github.steveice10.opennbt.tag.builtin.IntTag;
 import com.github.steveice10.opennbt.tag.builtin.ListTag;
 import com.github.steveice10.opennbt.tag.builtin.Tag;
 import mc.replay.packetlib.data.Item;
+import mc.replay.packetlib.utils.ProtocolVersion;
 import mc.replay.wrapper.item.deserializer.ItemDeserializer;
 import mc.replay.wrapper.item.serializer.ItemSerializer;
+import mc.replay.wrapper.mappings.objects.MaterialMapping;
+import mc.replay.wrapper.utils.WrapperMappingsUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -25,15 +28,20 @@ public final class ItemWrapper extends Item {
         this(item.materialId(), item.amount(), item.meta());
     }
 
-    public ItemWrapper(@NotNull ItemStack itemStack) {
-        this(of(itemStack));
+    public ItemWrapper(@NotNull ProtocolVersion protocolVersion, @NotNull ItemStack itemStack) {
+        this(of(protocolVersion, itemStack));
         this.itemStack = itemStack;
     }
 
-    public @NotNull ItemStack toItemStack() {
+    public ItemWrapper(@NotNull ItemStack itemStack) {
+        this(ProtocolVersion.getServerVersion(), itemStack);
+    }
+
+    public @NotNull ItemStack toItemStack(@NotNull ProtocolVersion protocolVersion) {
         if (this.itemStack != null) return this.itemStack;
 
-        Material material = Material.values()[this.materialId()];
+        MaterialMapping materialMapping = WrapperMappingsUtils.getMaterialMapping(protocolVersion, this.materialId());
+        Material material = Material.getMaterial(materialMapping.key());
         ItemStack itemStack = new ItemStack(material, this.amount());
 
         CompoundTag meta = this.meta();
@@ -52,8 +60,12 @@ public final class ItemWrapper extends Item {
         return this.itemStack = itemStack;
     }
 
-    private static @NotNull Item of(@NotNull ItemStack itemStack) {
-        int materialId = itemStack.getType().ordinal();
+    public @NotNull ItemStack toItemStack() {
+        return this.toItemStack(ProtocolVersion.getServerVersion());
+    }
+
+    private static @NotNull Item of(@NotNull ProtocolVersion protocolVersion, @NotNull ItemStack itemStack) {
+        int materialId = WrapperMappingsUtils.getMaterialMapping(protocolVersion, itemStack.getType()).id();
         byte amount = (byte) itemStack.getAmount();
 
         CompoundTag meta = new CompoundTag("");

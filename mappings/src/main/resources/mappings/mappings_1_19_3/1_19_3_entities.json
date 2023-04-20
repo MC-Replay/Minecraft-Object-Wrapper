@@ -1,0 +1,597 @@
+{
+  "minecraft:allay": {
+    "id": 0,
+    "mojangName": "ALLAY",
+    "packetType": "LIVING"
+  },
+  "minecraft:area_effect_cloud": {
+    "id": 1,
+    "mojangName": "AREA_EFFECT_CLOUD",
+    "packetType": "BASE"
+  },
+  "minecraft:armor_stand": {
+    "id": 2,
+    "mojangName": "ARMOR_STAND",
+    "packetType": "LIVING"
+  },
+  "minecraft:arrow": {
+    "id": 3,
+    "mojangName": "ARROW",
+    "packetType": "BASE"
+  },
+  "minecraft:axolotl": {
+    "id": 4,
+    "mojangName": "AXOLOTL",
+    "packetType": "LIVING"
+  },
+  "minecraft:bat": {
+    "id": 5,
+    "mojangName": "BAT",
+    "packetType": "LIVING"
+  },
+  "minecraft:bee": {
+    "id": 6,
+    "mojangName": "BEE",
+    "packetType": "LIVING"
+  },
+  "minecraft:blaze": {
+    "id": 7,
+    "mojangName": "BLAZE",
+    "packetType": "LIVING"
+  },
+  "minecraft:boat": {
+    "id": 8,
+    "mojangName": "BOAT",
+    "packetType": "BASE"
+  },
+  "minecraft:camel": {
+    "id": 11,
+    "mojangName": "CAMEL",
+    "packetType": "LIVING"
+  },
+  "minecraft:cat": {
+    "id": 10,
+    "mojangName": "CAT",
+    "packetType": "LIVING"
+  },
+  "minecraft:cave_spider": {
+    "id": 12,
+    "mojangName": "CAVE_SPIDER",
+    "packetType": "LIVING"
+  },
+  "minecraft:chest_boat": {
+    "id": 9,
+    "mojangName": "CHEST_BOAT",
+    "packetType": "BASE"
+  },
+  "minecraft:chest_minecart": {
+    "id": 55,
+    "mojangName": "CHEST_MINECART",
+    "packetType": "BASE"
+  },
+  "minecraft:chicken": {
+    "id": 13,
+    "mojangName": "CHICKEN",
+    "packetType": "LIVING"
+  },
+  "minecraft:cod": {
+    "id": 14,
+    "mojangName": "COD",
+    "packetType": "LIVING"
+  },
+  "minecraft:command_block_minecart": {
+    "id": 56,
+    "mojangName": "COMMAND_BLOCK_MINECART",
+    "packetType": "BASE"
+  },
+  "minecraft:cow": {
+    "id": 15,
+    "mojangName": "COW",
+    "packetType": "LIVING"
+  },
+  "minecraft:creeper": {
+    "id": 16,
+    "mojangName": "CREEPER",
+    "packetType": "LIVING"
+  },
+  "minecraft:dolphin": {
+    "id": 17,
+    "mojangName": "DOLPHIN",
+    "packetType": "LIVING"
+  },
+  "minecraft:donkey": {
+    "id": 18,
+    "mojangName": "DONKEY",
+    "packetType": "LIVING"
+  },
+  "minecraft:dragon_fireball": {
+    "id": 19,
+    "mojangName": "DRAGON_FIREBALL",
+    "packetType": "BASE"
+  },
+  "minecraft:drowned": {
+    "id": 20,
+    "mojangName": "DROWNED",
+    "packetType": "LIVING"
+  },
+  "minecraft:egg": {
+    "id": 94,
+    "mojangName": "EGG",
+    "packetType": "BASE"
+  },
+  "minecraft:elder_guardian": {
+    "id": 21,
+    "mojangName": "ELDER_GUARDIAN",
+    "packetType": "LIVING"
+  },
+  "minecraft:end_crystal": {
+    "id": 22,
+    "mojangName": "END_CRYSTAL",
+    "packetType": "BASE"
+  },
+  "minecraft:ender_dragon": {
+    "id": 23,
+    "mojangName": "ENDER_DRAGON",
+    "packetType": "LIVING"
+  },
+  "minecraft:ender_pearl": {
+    "id": 95,
+    "mojangName": "ENDER_PEARL",
+    "packetType": "BASE"
+  },
+  "minecraft:enderman": {
+    "id": 24,
+    "mojangName": "ENDERMAN",
+    "packetType": "LIVING"
+  },
+  "minecraft:endermite": {
+    "id": 25,
+    "mojangName": "ENDERMITE",
+    "packetType": "LIVING"
+  },
+  "minecraft:evoker": {
+    "id": 26,
+    "mojangName": "EVOKER",
+    "packetType": "LIVING"
+  },
+  "minecraft:evoker_fangs": {
+    "id": 27,
+    "mojangName": "EVOKER_FANGS",
+    "packetType": "BASE"
+  },
+  "minecraft:experience_bottle": {
+    "id": 96,
+    "mojangName": "EXPERIENCE_BOTTLE",
+    "packetType": "BASE"
+  },
+  "minecraft:experience_orb": {
+    "id": 28,
+    "mojangName": "EXPERIENCE_ORB",
+    "packetType": "EXPERIENCE_ORB"
+  },
+  "minecraft:eye_of_ender": {
+    "id": 29,
+    "mojangName": "EYE_OF_ENDER",
+    "packetType": "BASE"
+  },
+  "minecraft:falling_block": {
+    "id": 30,
+    "mojangName": "FALLING_BLOCK",
+    "packetType": "BASE"
+  },
+  "minecraft:fireball": {
+    "id": 47,
+    "mojangName": "FIREBALL",
+    "packetType": "BASE"
+  },
+  "minecraft:firework_rocket": {
+    "id": 31,
+    "mojangName": "FIREWORK_ROCKET",
+    "packetType": "BASE"
+  },
+  "minecraft:fishing_bobber": {
+    "id": 118,
+    "mojangName": "FISHING_BOBBER",
+    "packetType": "BASE"
+  },
+  "minecraft:fox": {
+    "id": 32,
+    "mojangName": "FOX",
+    "packetType": "LIVING"
+  },
+  "minecraft:frog": {
+    "id": 33,
+    "mojangName": "FROG",
+    "packetType": "LIVING"
+  },
+  "minecraft:furnace_minecart": {
+    "id": 57,
+    "mojangName": "FURNACE_MINECART",
+    "packetType": "BASE"
+  },
+  "minecraft:ghast": {
+    "id": 34,
+    "mojangName": "GHAST",
+    "packetType": "LIVING"
+  },
+  "minecraft:giant": {
+    "id": 35,
+    "mojangName": "GIANT",
+    "packetType": "LIVING"
+  },
+  "minecraft:glow_item_frame": {
+    "id": 36,
+    "mojangName": "GLOW_ITEM_FRAME",
+    "packetType": "BASE"
+  },
+  "minecraft:glow_squid": {
+    "id": 37,
+    "mojangName": "GLOW_SQUID",
+    "packetType": "LIVING"
+  },
+  "minecraft:goat": {
+    "id": 38,
+    "mojangName": "GOAT",
+    "packetType": "LIVING"
+  },
+  "minecraft:guardian": {
+    "id": 39,
+    "mojangName": "GUARDIAN",
+    "packetType": "LIVING"
+  },
+  "minecraft:hoglin": {
+    "id": 40,
+    "mojangName": "HOGLIN",
+    "packetType": "LIVING"
+  },
+  "minecraft:hopper_minecart": {
+    "id": 58,
+    "mojangName": "HOPPER_MINECART",
+    "packetType": "BASE"
+  },
+  "minecraft:horse": {
+    "id": 41,
+    "mojangName": "HORSE",
+    "packetType": "LIVING"
+  },
+  "minecraft:husk": {
+    "id": 42,
+    "mojangName": "HUSK",
+    "packetType": "LIVING"
+  },
+  "minecraft:illusioner": {
+    "id": 43,
+    "mojangName": "ILLUSIONER",
+    "packetType": "LIVING"
+  },
+  "minecraft:iron_golem": {
+    "id": 44,
+    "mojangName": "IRON_GOLEM",
+    "packetType": "LIVING"
+  },
+  "minecraft:item": {
+    "id": 45,
+    "mojangName": "ITEM",
+    "packetType": "BASE"
+  },
+  "minecraft:item_frame": {
+    "id": 46,
+    "mojangName": "ITEM_FRAME",
+    "packetType": "BASE"
+  },
+  "minecraft:leash_knot": {
+    "id": 48,
+    "mojangName": "LEASH_KNOT",
+    "packetType": "BASE"
+  },
+  "minecraft:lightning_bolt": {
+    "id": 49,
+    "mojangName": "LIGHTNING_BOLT",
+    "packetType": "BASE"
+  },
+  "minecraft:llama": {
+    "id": 50,
+    "mojangName": "LLAMA",
+    "packetType": "LIVING"
+  },
+  "minecraft:llama_spit": {
+    "id": 51,
+    "mojangName": "LLAMA_SPIT",
+    "packetType": "BASE"
+  },
+  "minecraft:magma_cube": {
+    "id": 52,
+    "mojangName": "MAGMA_CUBE",
+    "packetType": "LIVING"
+  },
+  "minecraft:marker": {
+    "id": 53,
+    "mojangName": "MARKER",
+    "packetType": "BASE"
+  },
+  "minecraft:minecart": {
+    "id": 54,
+    "mojangName": "MINECART",
+    "packetType": "BASE"
+  },
+  "minecraft:mooshroom": {
+    "id": 62,
+    "mojangName": "MOOSHROOM",
+    "packetType": "LIVING"
+  },
+  "minecraft:mule": {
+    "id": 61,
+    "mojangName": "MULE",
+    "packetType": "LIVING"
+  },
+  "minecraft:ocelot": {
+    "id": 63,
+    "mojangName": "OCELOT",
+    "packetType": "LIVING"
+  },
+  "minecraft:painting": {
+    "id": 64,
+    "mojangName": "PAINTING",
+    "packetType": "PAINTING"
+  },
+  "minecraft:panda": {
+    "id": 65,
+    "mojangName": "PANDA",
+    "packetType": "LIVING"
+  },
+  "minecraft:parrot": {
+    "id": 66,
+    "mojangName": "PARROT",
+    "packetType": "LIVING"
+  },
+  "minecraft:phantom": {
+    "id": 67,
+    "mojangName": "PHANTOM",
+    "packetType": "LIVING"
+  },
+  "minecraft:pig": {
+    "id": 68,
+    "mojangName": "PIG",
+    "packetType": "LIVING"
+  },
+  "minecraft:piglin": {
+    "id": 69,
+    "mojangName": "PIGLIN",
+    "packetType": "LIVING"
+  },
+  "minecraft:piglin_brute": {
+    "id": 70,
+    "mojangName": "PIGLIN_BRUTE",
+    "packetType": "LIVING"
+  },
+  "minecraft:pillager": {
+    "id": 71,
+    "mojangName": "PILLAGER",
+    "packetType": "LIVING"
+  },
+  "minecraft:player": {
+    "id": 117,
+    "mojangName": "PLAYER",
+    "packetType": "PLAYER"
+  },
+  "minecraft:polar_bear": {
+    "id": 72,
+    "mojangName": "POLAR_BEAR",
+    "packetType": "LIVING"
+  },
+  "minecraft:potion": {
+    "id": 97,
+    "mojangName": "POTION",
+    "packetType": "BASE"
+  },
+  "minecraft:pufferfish": {
+    "id": 74,
+    "mojangName": "PUFFERFISH",
+    "packetType": "LIVING"
+  },
+  "minecraft:rabbit": {
+    "id": 75,
+    "mojangName": "RABBIT",
+    "packetType": "LIVING"
+  },
+  "minecraft:ravager": {
+    "id": 76,
+    "mojangName": "RAVAGER",
+    "packetType": "LIVING"
+  },
+  "minecraft:salmon": {
+    "id": 77,
+    "mojangName": "SALMON",
+    "packetType": "LIVING"
+  },
+  "minecraft:sheep": {
+    "id": 78,
+    "mojangName": "SHEEP",
+    "packetType": "LIVING"
+  },
+  "minecraft:shulker": {
+    "id": 79,
+    "mojangName": "SHULKER",
+    "packetType": "LIVING"
+  },
+  "minecraft:shulker_bullet": {
+    "id": 80,
+    "mojangName": "SHULKER_BULLET",
+    "packetType": "BASE"
+  },
+  "minecraft:silverfish": {
+    "id": 81,
+    "mojangName": "SILVERFISH",
+    "packetType": "LIVING"
+  },
+  "minecraft:skeleton": {
+    "id": 82,
+    "mojangName": "SKELETON",
+    "packetType": "LIVING"
+  },
+  "minecraft:skeleton_horse": {
+    "id": 83,
+    "mojangName": "SKELETON_HORSE",
+    "packetType": "LIVING"
+  },
+  "minecraft:slime": {
+    "id": 84,
+    "mojangName": "SLIME",
+    "packetType": "LIVING"
+  },
+  "minecraft:small_fireball": {
+    "id": 85,
+    "mojangName": "SMALL_FIREBALL",
+    "packetType": "BASE"
+  },
+  "minecraft:snow_golem": {
+    "id": 86,
+    "mojangName": "SNOW_GOLEM",
+    "packetType": "LIVING"
+  },
+  "minecraft:snowball": {
+    "id": 87,
+    "mojangName": "SNOWBALL",
+    "packetType": "BASE"
+  },
+  "minecraft:spawner_minecart": {
+    "id": 59,
+    "mojangName": "SPAWNER_MINECART",
+    "packetType": "BASE"
+  },
+  "minecraft:spectral_arrow": {
+    "id": 88,
+    "mojangName": "SPECTRAL_ARROW",
+    "packetType": "BASE"
+  },
+  "minecraft:spider": {
+    "id": 89,
+    "mojangName": "SPIDER",
+    "packetType": "LIVING"
+  },
+  "minecraft:squid": {
+    "id": 90,
+    "mojangName": "SQUID",
+    "packetType": "LIVING"
+  },
+  "minecraft:stray": {
+    "id": 91,
+    "mojangName": "STRAY",
+    "packetType": "LIVING"
+  },
+  "minecraft:strider": {
+    "id": 92,
+    "mojangName": "STRIDER",
+    "packetType": "LIVING"
+  },
+  "minecraft:tadpole": {
+    "id": 93,
+    "mojangName": "TADPOLE",
+    "packetType": "LIVING"
+  },
+  "minecraft:tnt": {
+    "id": 73,
+    "mojangName": "TNT",
+    "packetType": "BASE"
+  },
+  "minecraft:tnt_minecart": {
+    "id": 60,
+    "mojangName": "TNT_MINECART",
+    "packetType": "BASE"
+  },
+  "minecraft:trader_llama": {
+    "id": 99,
+    "mojangName": "TRADER_LLAMA",
+    "packetType": "LIVING"
+  },
+  "minecraft:trident": {
+    "id": 98,
+    "mojangName": "TRIDENT",
+    "packetType": "BASE"
+  },
+  "minecraft:tropical_fish": {
+    "id": 100,
+    "mojangName": "TROPICAL_FISH",
+    "packetType": "LIVING"
+  },
+  "minecraft:turtle": {
+    "id": 101,
+    "mojangName": "TURTLE",
+    "packetType": "LIVING"
+  },
+  "minecraft:vex": {
+    "id": 102,
+    "mojangName": "VEX",
+    "packetType": "LIVING"
+  },
+  "minecraft:villager": {
+    "id": 103,
+    "mojangName": "VILLAGER",
+    "packetType": "LIVING"
+  },
+  "minecraft:vindicator": {
+    "id": 104,
+    "mojangName": "VINDICATOR",
+    "packetType": "LIVING"
+  },
+  "minecraft:wandering_trader": {
+    "id": 105,
+    "mojangName": "WANDERING_TRADER",
+    "packetType": "LIVING"
+  },
+  "minecraft:warden": {
+    "id": 106,
+    "mojangName": "WARDEN",
+    "packetType": "LIVING"
+  },
+  "minecraft:witch": {
+    "id": 107,
+    "mojangName": "WITCH",
+    "packetType": "LIVING"
+  },
+  "minecraft:wither": {
+    "id": 108,
+    "mojangName": "WITHER",
+    "packetType": "LIVING"
+  },
+  "minecraft:wither_skeleton": {
+    "id": 109,
+    "mojangName": "WITHER_SKELETON",
+    "packetType": "LIVING"
+  },
+  "minecraft:wither_skull": {
+    "id": 110,
+    "mojangName": "WITHER_SKULL",
+    "packetType": "BASE"
+  },
+  "minecraft:wolf": {
+    "id": 111,
+    "mojangName": "WOLF",
+    "packetType": "LIVING"
+  },
+  "minecraft:zoglin": {
+    "id": 112,
+    "mojangName": "ZOGLIN",
+    "packetType": "LIVING"
+  },
+  "minecraft:zombie": {
+    "id": 113,
+    "mojangName": "ZOMBIE",
+    "packetType": "LIVING"
+  },
+  "minecraft:zombie_horse": {
+    "id": 114,
+    "mojangName": "ZOMBIE_HORSE",
+    "packetType": "LIVING"
+  },
+  "minecraft:zombie_villager": {
+    "id": 115,
+    "mojangName": "ZOMBIE_VILLAGER",
+    "packetType": "LIVING"
+  },
+  "minecraft:zombified_piglin": {
+    "id": 116,
+    "mojangName": "ZOMBIFIED_PIGLIN",
+    "packetType": "LIVING"
+  }
+}

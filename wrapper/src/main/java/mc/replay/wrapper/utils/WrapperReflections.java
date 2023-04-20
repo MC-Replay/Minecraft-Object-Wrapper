@@ -225,8 +225,8 @@ public final class WrapperReflections {
     }
 
     @SuppressWarnings("unchecked, rawtypes")
-    public static Map<Integer, Metadata.Entry<?>> readDataWatcher(@NotNull Entity entity) {
-        Map<Integer, Metadata.Entry<?>> entries = new HashMap<>();
+    public static Map<Integer, Entry<?>> readDataWatcher(@NotNull Entity entity) {
+        Map<Integer, Entry<?>> entries = new HashMap<>();
         try {
             Object nmsEntity = getNMSEntity(entity);
             Object dataWatcher = DATA_WATCHER_FIELD.get(nmsEntity);
