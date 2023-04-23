@@ -5,11 +5,12 @@ import mc.replay.packetlib.data.entity.Metadata;
 import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import mc.replay.wrapper.entity.metadata.ProjectileMetadata;
+import mc.replay.wrapper.entity.metadata.ShooterProvider;
 import mc.replay.wrapper.item.ItemWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FireworkRocketMetadata extends EntityMetadata implements ProjectileMetadata {
+public class FireworkRocketMetadata extends EntityMetadata implements ShooterProvider, ProjectileMetadata {
 
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 3;
@@ -28,7 +29,17 @@ public class FireworkRocketMetadata extends EntityMetadata implements Projectile
     public void setShooter(@Nullable EntityWrapper shooter) {
         this.shooter = shooter;
         Integer entityId = (shooter == null) ? null : shooter.getEntityId();
-        super.metadata.setIndex(OFFSET + 1, Metadata.OptVarInt(entityId));
+        this.setShooterId(entityId);
+    }
+
+    @Override
+    public @Nullable Integer getShooterId() {
+        return super.metadata.getIndex(OFFSET + 1, null);
+    }
+
+    @Override
+    public void setShooterId(@Nullable Integer shooterId) {
+        super.metadata.setIndex(OFFSET + 1, Metadata.OptVarInt(shooterId));
     }
 
     public void setShotAtAngle(boolean value) {
