@@ -4,16 +4,18 @@ import mc.replay.packetlib.data.entity.Metadata;
 import mc.replay.wrapper.entity.EntityWrapper;
 import mc.replay.wrapper.entity.metadata.EntityMetadata;
 import mc.replay.wrapper.entity.metadata.ObjectDataProvider;
+import mc.replay.wrapper.entity.metadata.ShooterProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FishingHookMetadata extends EntityMetadata implements ObjectDataProvider {
+public class FishingHookMetadata extends EntityMetadata implements ShooterProvider, ObjectDataProvider {
 
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
     private EntityWrapper hooked;
     private EntityWrapper owner;
+    private Integer ownerId = null;
 
     public FishingHookMetadata(@NotNull Metadata metadata) {
         super(metadata);
@@ -31,6 +33,7 @@ public class FishingHookMetadata extends EntityMetadata implements ObjectDataPro
 
     public void setOwnerEntity(@Nullable EntityWrapper value) {
         this.owner = value;
+        this.ownerId = (value == null) ? null : value.getEntityId();
     }
 
     public @Nullable EntityWrapper getHookedEntity() {
@@ -46,12 +49,22 @@ public class FishingHookMetadata extends EntityMetadata implements ObjectDataPro
     }
 
     @Override
+    public @Nullable Integer getShooterId() {
+        return this.ownerId;
+    }
+
+    @Override
+    public void setShooterId(@Nullable Integer shooterId) {
+        this.ownerId = shooterId;
+    }
+
+    @Override
     public int getObjectData() {
-        return (this.owner == null) ? 0 : this.owner.getEntityId();
+        return (this.ownerId == null) ? 0 : this.ownerId;
     }
 
     @Override
     public boolean requiresVelocityPacketAtSpawn() {
-        return false;
+        return true;
     }
 }
