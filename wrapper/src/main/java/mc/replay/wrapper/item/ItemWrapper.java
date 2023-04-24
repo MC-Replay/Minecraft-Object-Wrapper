@@ -41,7 +41,11 @@ public final class ItemWrapper extends Item {
         if (this.itemStack != null) return this.itemStack;
 
         MaterialMapping materialMapping = WrapperMappingsUtils.getMaterialMapping(protocolVersion, this.materialId());
-        Material material = Material.getMaterial(materialMapping.key());
+        Material material = Material.matchMaterial(materialMapping.key());
+        if (material == null) {
+            throw new IllegalStateException("Couldn't find correct mapping for " + materialMapping.key());
+        }
+
         ItemStack itemStack = new ItemStack(material, this.amount());
 
         CompoundTag meta = this.meta();
