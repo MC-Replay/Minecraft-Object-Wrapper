@@ -29,6 +29,8 @@ final class SkullMetaSerializer {
         UUID id = NBTUtils.uuidFromTag(idTag);
 
         CompoundTag propertiesTag = compound.get("Properties");
+        if (propertiesTag == null) return;
+
         for (Map.Entry<String, Tag> entry : propertiesTag.getValue().entrySet()) {
             ListTag listTag = (ListTag) entry.getValue();
             if (listTag == null) continue;
