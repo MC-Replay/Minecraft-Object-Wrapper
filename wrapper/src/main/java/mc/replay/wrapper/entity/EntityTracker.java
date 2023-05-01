@@ -11,23 +11,27 @@ import java.util.Set;
 
 public final class EntityTracker {
 
-    public static final Map<Integer, EntityWrapper> ENTITY_CACHE = new HashMap<>();
+    public final Map<Integer, EntityWrapper> entityCache = new HashMap<>();
 
-    private EntityTracker() {
+    public @Nullable EntityWrapper getEntityWrapper(int entityId) {
+        return entityCache.get(entityId);
     }
 
-    public static @Nullable EntityWrapper getEntityWrapper(int entityId) {
-        return ENTITY_CACHE.get(entityId);
+    public @Nullable EntityWrapper getOrFindEntityWrapper(@Nullable World bukkitWorld, int entityId, boolean shouldCache) {
+        EntityWrapper entityWrapper = this.getEntityWrapper(entityId);
+        if (entityWrapper != null) return entityWrapper;
+
+        return this.findEntityWrapper(bukkitWorld, entityId, shouldCache);
     }
 
-    public static @Nullable EntityWrapper findEntityWrapper(@Nullable World bukkitWorld, int entityId, boolean shouldCache) {
+    public @Nullable EntityWrapper findEntityWrapper(@Nullable World bukkitWorld, int entityId, boolean shouldCache) {
         Entity entity = findEntity(bukkitWorld, entityId);
         if (entity == null) return null;
 
         EntityWrapper entityWrapper = new EntityWrapper(entity);
         if (shouldCache) {
             try {
-                ENTITY_CACHE.put(entityId, entityWrapper);
+                entityCache.put(entityId, entityWrapper);
             } catch (Exception ignored) {
             }
         }
@@ -35,7 +39,7 @@ public final class EntityTracker {
         return entityWrapper;
     }
 
-    public static @Nullable Entity findEntity(@Nullable World bukkitWorld, int entityId) {
+    public @Nullable Entity findEntity(@Nullable World bukkitWorld, int entityId) {
         for (World world : (bukkitWorld == null) ? Bukkit.getServer().getWorlds() : Set.of(bukkitWorld)) {
             for (Entity entity : world.getEntities()) {
                 if (entity.getEntityId() == entityId) {
