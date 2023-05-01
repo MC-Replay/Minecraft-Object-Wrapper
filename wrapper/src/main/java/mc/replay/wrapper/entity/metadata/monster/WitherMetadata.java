@@ -10,6 +10,11 @@ public class WitherMetadata extends MonsterMetadata {
     public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 4;
 
+    public static final int CENTER_HEAD_INDEX = OFFSET;
+    public static final int LEFT_HEAD_INDEX = OFFSET + 1;
+    public static final int RIGHT_HEAD_INDEX = OFFSET + 2;
+    public static final int INVULNERABLE_TIME_INDEX = OFFSET + 3;
+
     private EntityWrapper centerHead;
     private EntityWrapper leftHead;
     private EntityWrapper rightHead;
@@ -20,21 +25,21 @@ public class WitherMetadata extends MonsterMetadata {
 
     public void setCenterHead(@Nullable EntityWrapper value) {
         this.centerHead = value;
-        super.metadata.setIndex(OFFSET, Metadata.VarInt((value == null) ? 0 : value.getEntityId()));
+        super.metadata.setIndex(CENTER_HEAD_INDEX, Metadata.VarInt((value == null) ? 0 : value.getEntityId()));
     }
 
     public void setLeftHead(@Nullable EntityWrapper value) {
         this.leftHead = value;
-        super.metadata.setIndex(OFFSET + 1, Metadata.VarInt((value == null) ? 0 : value.getEntityId()));
+        super.metadata.setIndex(LEFT_HEAD_INDEX, Metadata.VarInt((value == null) ? 0 : value.getEntityId()));
     }
 
     public void setRightHead(@Nullable EntityWrapper value) {
         this.rightHead = value;
-        super.metadata.setIndex(OFFSET + 2, Metadata.VarInt((value == null) ? 0 : value.getEntityId()));
+        super.metadata.setIndex(RIGHT_HEAD_INDEX, Metadata.VarInt((value == null) ? 0 : value.getEntityId()));
     }
 
     public void setInvulnerableTime(int value) {
-        super.metadata.setIndex(OFFSET + 3, Metadata.VarInt(value));
+        super.metadata.setIndex(INVULNERABLE_TIME_INDEX, Metadata.VarInt(value));
     }
 
     public @Nullable EntityWrapper getCenterHead() {
@@ -50,6 +55,6 @@ public class WitherMetadata extends MonsterMetadata {
     }
 
     public int getInvulnerableTime() {
-        return super.metadata.getIndex(OFFSET + 3, 0);
+        return super.metadata.getIndex(INVULNERABLE_TIME_INDEX, 0);
     }
 }

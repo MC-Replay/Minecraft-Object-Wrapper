@@ -10,8 +10,10 @@ public class SheepMetadata extends AnimalMetadata {
     public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
-    private static final byte COLOR_BITS = 0x0F;
-    private static final byte SHEARED_BIT = 0x10;
+    public static final int MASK_INDEX = OFFSET;
+
+    public static final byte COLOR_BITS = 0x0F;
+    public static final byte SHEARED_BIT = 0x10;
 
     public SheepMetadata(@NotNull Metadata metadata) {
         super(metadata);
@@ -28,14 +30,14 @@ public class SheepMetadata extends AnimalMetadata {
     }
 
     public void setSheared(boolean value) {
-        this.setMaskBit(OFFSET, SHEARED_BIT, value);
+        this.setMaskBit(MASK_INDEX, SHEARED_BIT, value);
     }
 
     public int getColor() {
-        return this.getMask(OFFSET) & COLOR_BITS;
+        return this.getMask(MASK_INDEX) & COLOR_BITS;
     }
 
     public boolean isSheared() {
-        return this.getMaskBit(OFFSET, SHEARED_BIT);
+        return this.getMaskBit(MASK_INDEX, SHEARED_BIT);
     }
 }

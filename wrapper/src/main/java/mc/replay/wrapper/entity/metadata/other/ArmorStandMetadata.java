@@ -10,92 +10,100 @@ public class ArmorStandMetadata extends LivingEntityMetadata {
     public static final int OFFSET = LivingEntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 7;
 
-    private static final byte IS_SMALL_BIT = 0x01;
-    private static final byte HAS_ARMS_BIT = 0x04;
-    private static final byte HAS_NO_BASE_PLATE_BIT = 0x08;
-    private static final byte IS_MARKER_BIT = 0x10;
+    public static final int MASK_INDEX = OFFSET;
+    public static final int HEAD_ROTATION_INDEX = OFFSET + 1;
+    public static final int BODY_ROTATION_INDEX = OFFSET + 2;
+    public static final int LEFT_ARM_ROTATION_INDEX = OFFSET + 3;
+    public static final int RIGHT_ARM_ROTATION_INDEX = OFFSET + 4;
+    public static final int LEFT_LEG_ROTATION_INDEX = OFFSET + 5;
+    public static final int RIGHT_LEG_ROTATION_INDEX = OFFSET + 6;
+
+    public static final byte IS_SMALL_BIT = 0x01;
+    public static final byte HAS_ARMS_BIT = 0x04;
+    public static final byte HAS_NO_BASE_PLATE_BIT = 0x08;
+    public static final byte IS_MARKER_BIT = 0x10;
 
     public ArmorStandMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setSmall(boolean value) {
-        this.setMaskBit(OFFSET, IS_SMALL_BIT, value);
+        this.setMaskBit(MASK_INDEX, IS_SMALL_BIT, value);
     }
 
     public void setHasArms(boolean value) {
-        this.setMaskBit(OFFSET, HAS_ARMS_BIT, value);
+        this.setMaskBit(MASK_INDEX, HAS_ARMS_BIT, value);
     }
 
     public void setHasBasePlate(boolean value) {
-        this.setMaskBit(OFFSET, HAS_NO_BASE_PLATE_BIT, !value);
+        this.setMaskBit(MASK_INDEX, HAS_NO_BASE_PLATE_BIT, !value);
     }
 
     public void setMarker(boolean value) {
-        this.setMaskBit(OFFSET, IS_MARKER_BIT, value);
+        this.setMaskBit(MASK_INDEX, IS_MARKER_BIT, value);
     }
 
     public void setHeadRotation(@NotNull Vector value) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.Rotation(value));
+        super.metadata.setIndex(HEAD_ROTATION_INDEX, Metadata.Rotation(value));
     }
 
     public void setBodyRotation(@NotNull Vector value) {
-        super.metadata.setIndex(OFFSET + 2, Metadata.Rotation(value));
+        super.metadata.setIndex(BODY_ROTATION_INDEX, Metadata.Rotation(value));
     }
 
     public void setLeftArmRotation(@NotNull Vector value) {
-        super.metadata.setIndex(OFFSET + 3, Metadata.Rotation(value));
+        super.metadata.setIndex(LEFT_ARM_ROTATION_INDEX, Metadata.Rotation(value));
     }
 
     public void setRightArmRotation(@NotNull Vector value) {
-        super.metadata.setIndex(OFFSET + 4, Metadata.Rotation(value));
+        super.metadata.setIndex(RIGHT_ARM_ROTATION_INDEX, Metadata.Rotation(value));
     }
 
     public void setLeftLegRotation(@NotNull Vector value) {
-        super.metadata.setIndex(OFFSET + 5, Metadata.Rotation(value));
+        super.metadata.setIndex(LEFT_LEG_ROTATION_INDEX, Metadata.Rotation(value));
     }
 
     public void setRightLegRotation(@NotNull Vector value) {
-        super.metadata.setIndex(OFFSET + 6, Metadata.Rotation(value));
+        super.metadata.setIndex(RIGHT_LEG_ROTATION_INDEX, Metadata.Rotation(value));
     }
 
     public boolean isSmall() {
-        return this.getMaskBit(OFFSET, IS_SMALL_BIT);
+        return this.getMaskBit(MASK_INDEX, IS_SMALL_BIT);
     }
 
     public boolean hasArms() {
-        return this.getMaskBit(OFFSET, HAS_ARMS_BIT);
+        return this.getMaskBit(MASK_INDEX, HAS_ARMS_BIT);
     }
 
     public boolean hasBasePlate() {
-        return !this.getMaskBit(OFFSET, HAS_NO_BASE_PLATE_BIT);
+        return !this.getMaskBit(MASK_INDEX, HAS_NO_BASE_PLATE_BIT);
     }
 
     public boolean isMarker() {
-        return this.getMaskBit(OFFSET, IS_MARKER_BIT);
+        return this.getMaskBit(MASK_INDEX, IS_MARKER_BIT);
     }
 
     public @NotNull Vector getHeadRotation() {
-        return super.metadata.getIndex(OFFSET + 1, new Vector(0, 0, 0));
+        return super.metadata.getIndex(HEAD_ROTATION_INDEX, new Vector(0, 0, 0));
     }
 
     public @NotNull Vector getBodyRotation() {
-        return super.metadata.getIndex(OFFSET + 2, new Vector(0, 0, 0));
+        return super.metadata.getIndex(BODY_ROTATION_INDEX, new Vector(0, 0, 0));
     }
 
     public @NotNull Vector getLeftArmRotation() {
-        return super.metadata.getIndex(OFFSET + 3, new Vector(-10D, 0D, -10D));
+        return super.metadata.getIndex(LEFT_ARM_ROTATION_INDEX, new Vector(-10D, 0D, -10D));
     }
 
     public @NotNull Vector getRightArmRotation() {
-        return super.metadata.getIndex(OFFSET + 4, new Vector(-15D, 0D, 10D));
+        return super.metadata.getIndex(RIGHT_ARM_ROTATION_INDEX, new Vector(-15D, 0D, 10D));
     }
 
     public @NotNull Vector getLeftLegRotation() {
-        return super.metadata.getIndex(OFFSET + 5, new Vector(-1D, 0D, -1D));
+        return super.metadata.getIndex(LEFT_LEG_ROTATION_INDEX, new Vector(-1D, 0D, -1D));
     }
 
     public @NotNull Vector getRightLegRotation() {
-        return super.metadata.getIndex(OFFSET + 6, new Vector(1D, 0D, 1D));
+        return super.metadata.getIndex(RIGHT_LEG_ROTATION_INDEX, new Vector(1D, 0D, 1D));
     }
 }

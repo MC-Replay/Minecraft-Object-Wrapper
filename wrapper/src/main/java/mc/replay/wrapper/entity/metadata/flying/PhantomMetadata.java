@@ -8,15 +8,17 @@ public class PhantomMetadata extends FlyingMetadata {
     public static final int OFFSET = FlyingMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int SIZE_INDEX = OFFSET;
+
     public PhantomMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setSize(int value) {
-        super.metadata.setIndex(OFFSET, Metadata.VarInt(value));
+        super.metadata.setIndex(SIZE_INDEX, Metadata.VarInt(value));
     }
 
     public int getSize() {
-        return super.metadata.getIndex(OFFSET, 0);
+        return super.metadata.getIndex(SIZE_INDEX, 0);
     }
 }

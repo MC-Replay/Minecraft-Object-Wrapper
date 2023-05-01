@@ -8,16 +8,18 @@ public class ZoglinMetadata extends MonsterMetadata {
     public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int BABY_INDEX = OFFSET;
+
     public ZoglinMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setBaby(boolean value) {
         if (this.isBaby() == value) return;
-        super.metadata.setIndex(OFFSET, Metadata.Boolean(value));
+        super.metadata.setIndex(BABY_INDEX, Metadata.Boolean(value));
     }
 
     public boolean isBaby() {
-        return super.metadata.getIndex(OFFSET, false);
+        return super.metadata.getIndex(BABY_INDEX, false);
     }
 }

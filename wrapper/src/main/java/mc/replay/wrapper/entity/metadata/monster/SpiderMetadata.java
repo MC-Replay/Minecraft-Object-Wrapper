@@ -8,17 +8,19 @@ public class SpiderMetadata extends MonsterMetadata {
     public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
-    private static final byte CLIMBING_BIT = 0x01;
+    public static final int MASK_INDEX = OFFSET;
+
+    public static final byte CLIMBING_BIT = 0x01;
 
     public SpiderMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setClimbing(boolean value) {
-        this.setMaskBit(OFFSET, CLIMBING_BIT, value);
+        this.setMaskBit(MASK_INDEX, CLIMBING_BIT, value);
     }
 
     public boolean isClimbing() {
-        return this.getMaskBit(OFFSET, CLIMBING_BIT);
+        return this.getMaskBit(MASK_INDEX, CLIMBING_BIT);
     }
 }

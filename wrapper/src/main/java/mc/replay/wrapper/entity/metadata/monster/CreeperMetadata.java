@@ -8,33 +8,37 @@ public class CreeperMetadata extends MonsterMetadata {
     public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 3;
 
+    public static final int STATE_INDEX = OFFSET;
+    public static final int CHARGED_INDEX = OFFSET + 1;
+    public static final int IGNITED_INDEX = OFFSET + 2;
+
     public CreeperMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setState(@NotNull State value) {
-        super.metadata.setIndex(OFFSET, Metadata.VarInt((value == State.IDLE) ? -1 : 1));
+        super.metadata.setIndex(STATE_INDEX, Metadata.VarInt((value == State.IDLE) ? -1 : 1));
     }
 
     public void setCharged(boolean value) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.Boolean(value));
+        super.metadata.setIndex(CHARGED_INDEX, Metadata.Boolean(value));
     }
 
     public void setIgnited(boolean value) {
-        super.metadata.setIndex(OFFSET + 2, Metadata.Boolean(value));
+        super.metadata.setIndex(IGNITED_INDEX, Metadata.Boolean(value));
     }
 
     public @NotNull State getState() {
-        int id = super.metadata.getIndex(OFFSET, -1);
+        int id = super.metadata.getIndex(STATE_INDEX, -1);
         return (id == -1) ? State.IDLE : State.FUSE;
     }
 
     public boolean isCharged() {
-        return super.metadata.getIndex(OFFSET + 1, false);
+        return super.metadata.getIndex(CHARGED_INDEX, false);
     }
 
     public boolean isIgnited() {
-        return super.metadata.getIndex(OFFSET + 2, false);
+        return super.metadata.getIndex(IGNITED_INDEX, false);
     }
 
     public enum State {

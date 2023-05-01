@@ -15,6 +15,10 @@ public class FireworkRocketMetadata extends EntityMetadata implements ShooterPro
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 3;
 
+    public static final int FIREWORK_INFO_INDEX = OFFSET;
+    public static final int SHOOTER_ID_INDEX = OFFSET + 1;
+    public static final int SHOT_AT_ANGLE_INDEX = OFFSET + 2;
+
     private EntityWrapper shooter;
 
     public FireworkRocketMetadata(@NotNull Metadata metadata) {
@@ -22,7 +26,7 @@ public class FireworkRocketMetadata extends EntityMetadata implements ShooterPro
     }
 
     public void setFireworkInfo(@NotNull ItemWrapper value) {
-        super.metadata.setIndex(OFFSET, Metadata.Slot(value));
+        super.metadata.setIndex(FIREWORK_INFO_INDEX, Metadata.Slot(value));
     }
 
     @Override
@@ -34,20 +38,20 @@ public class FireworkRocketMetadata extends EntityMetadata implements ShooterPro
 
     @Override
     public @Nullable Integer getShooterId() {
-        return super.metadata.getIndex(OFFSET + 1, null);
+        return super.metadata.getIndex(SHOOTER_ID_INDEX, null);
     }
 
     @Override
     public void setShooterId(@Nullable Integer shooterId) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.OptVarInt(shooterId));
+        super.metadata.setIndex(SHOOTER_ID_INDEX, Metadata.OptVarInt(shooterId));
     }
 
     public void setShotAtAngle(boolean value) {
-        super.metadata.setIndex(OFFSET + 2, Metadata.Boolean(value));
+        super.metadata.setIndex(SHOT_AT_ANGLE_INDEX, Metadata.Boolean(value));
     }
 
     public @NotNull ItemWrapper getFireworkInfo() {
-        return super.metadata.getIndex(OFFSET, new ItemWrapper(Item.AIR));
+        return super.metadata.getIndex(FIREWORK_INFO_INDEX, new ItemWrapper(Item.AIR));
     }
 
     @Override
@@ -56,6 +60,6 @@ public class FireworkRocketMetadata extends EntityMetadata implements ShooterPro
     }
 
     public boolean isShotAtAngle() {
-        return super.metadata.getIndex(OFFSET + 2, false);
+        return super.metadata.getIndex(SHOT_AT_ANGLE_INDEX, false);
     }
 }

@@ -8,16 +8,18 @@ public class TropicalFishMetadata extends AbstractFishMetadata {
     public static final int OFFSET = AbstractFishMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int VARIANT_INDEX = OFFSET;
+
     public TropicalFishMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public @NotNull Variant getVariant() {
-        return getVariantFromId(super.metadata.getIndex(OFFSET, 0));
+        return getVariantFromId(super.metadata.getIndex(VARIANT_INDEX, 0));
     }
 
     public void setVariant(@NotNull Variant value) {
-        super.metadata.setIndex(OFFSET, Metadata.VarInt(getVariantId(value)));
+        super.metadata.setIndex(VARIANT_INDEX, Metadata.VarInt(getVariantId(value)));
     }
 
     public static int getVariantId(@NotNull Variant variant) {

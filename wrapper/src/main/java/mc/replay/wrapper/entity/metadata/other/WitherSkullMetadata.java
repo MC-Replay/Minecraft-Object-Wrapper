@@ -13,6 +13,8 @@ public class WitherSkullMetadata extends EntityMetadata implements ObjectDataPro
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int INVULNERABLE_INDEX = OFFSET;
+
     private EntityWrapper shooter;
 
     public WitherSkullMetadata(@NotNull Metadata metadata) {
@@ -20,11 +22,11 @@ public class WitherSkullMetadata extends EntityMetadata implements ObjectDataPro
     }
 
     public void setInvulnerable(boolean value) {
-        super.metadata.setIndex(OFFSET, Metadata.Boolean(value));
+        super.metadata.setIndex(INVULNERABLE_INDEX, Metadata.Boolean(value));
     }
 
     public boolean isInvulnerable() {
-        return super.metadata.getIndex(OFFSET, false);
+        return super.metadata.getIndex(INVULNERABLE_INDEX, false);
     }
 
     @Override

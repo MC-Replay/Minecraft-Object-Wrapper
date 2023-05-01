@@ -12,6 +12,8 @@ class ItemContainingMetadata extends EntityMetadata {
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int ITEM_INDEX = OFFSET;
+
     private final ItemWrapper defaultItem;
 
     public ItemContainingMetadata(@NotNull Metadata metadata, @NotNull Material defaultItemMaterial) {
@@ -20,10 +22,10 @@ class ItemContainingMetadata extends EntityMetadata {
     }
 
     public void setItem(@NotNull ItemWrapper value) {
-        super.metadata.setIndex(OFFSET, Metadata.Slot(value));
+        super.metadata.setIndex(ITEM_INDEX, Metadata.Slot(value));
     }
 
     public @NotNull ItemWrapper getItem() {
-        return super.metadata.getIndex(OFFSET, this.defaultItem);
+        return super.metadata.getIndex(ITEM_INDEX, this.defaultItem);
     }
 }

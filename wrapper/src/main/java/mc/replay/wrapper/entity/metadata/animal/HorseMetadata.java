@@ -10,16 +10,18 @@ public class HorseMetadata extends AbstractHorseMetadata {
     public static final int OFFSET = AbstractHorseMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int VARIANT_INDEX = OFFSET;
+
     public HorseMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setVariant(@NotNull Variant variant) {
-        super.metadata.setIndex(OFFSET, Metadata.VarInt(getVariantId(variant.marking, variant.color)));
+        super.metadata.setIndex(VARIANT_INDEX, Metadata.VarInt(getVariantId(variant.marking, variant.color)));
     }
 
     public @NotNull Variant getVariant() {
-        return getVariantFromId(super.metadata.getIndex(OFFSET, 0));
+        return getVariantFromId(super.metadata.getIndex(VARIANT_INDEX, 0));
     }
 
     public static int getVariantId(@NotNull Marking marking, @NotNull Color color) {

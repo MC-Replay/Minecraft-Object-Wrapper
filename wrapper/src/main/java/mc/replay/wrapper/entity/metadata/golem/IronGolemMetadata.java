@@ -8,7 +8,7 @@ public class IronGolemMetadata extends AbstractGolemMetadata {
     public static final int OFFSET = AbstractGolemMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 0;
 
-    private static final byte PLAYER_CREATED_BIT = 0x01;
+    public static final byte PLAYER_CREATED_BIT = 0x01;
 
     public IronGolemMetadata(@NotNull Metadata metadata) {
         super(metadata);

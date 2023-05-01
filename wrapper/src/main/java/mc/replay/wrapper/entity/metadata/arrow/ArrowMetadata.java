@@ -12,6 +12,8 @@ public class ArrowMetadata extends AbstractArrowMetadata implements ObjectDataPr
     public static final int OFFSET = AbstractArrowMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int COLOR_INDEX = OFFSET;
+
     private EntityWrapper shooter;
 
     public ArrowMetadata(@NotNull Metadata metadata) {
@@ -19,11 +21,11 @@ public class ArrowMetadata extends AbstractArrowMetadata implements ObjectDataPr
     }
 
     public void setColor(int value) {
-        super.metadata.setIndex(OFFSET, Metadata.VarInt(value));
+        super.metadata.setIndex(COLOR_INDEX, Metadata.VarInt(value));
     }
 
     public int getColor() {
-        return super.metadata.getIndex(OFFSET, -1);
+        return super.metadata.getIndex(COLOR_INDEX, -1);
     }
 
     @Override

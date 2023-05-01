@@ -10,6 +10,9 @@ public class GuardianMetadata extends MonsterMetadata {
     public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
+    public static final int RETRACTING_SPIKES_INDEX = OFFSET;
+    public static final int TARGET_INDEX = OFFSET + 1;
+
     private EntityWrapper target;
 
     public GuardianMetadata(@NotNull Metadata metadata) {
@@ -17,16 +20,16 @@ public class GuardianMetadata extends MonsterMetadata {
     }
 
     public void setRetractingSpikes(boolean value) {
-        super.metadata.setIndex(OFFSET, Metadata.Boolean(value));
+        super.metadata.setIndex(RETRACTING_SPIKES_INDEX, Metadata.Boolean(value));
     }
 
     public void setTarget(@Nullable EntityWrapper value) {
         this.target = value;
-        super.metadata.setIndex(OFFSET + 1, Metadata.VarInt((value == null) ? 0 : value.getEntityId()));
+        super.metadata.setIndex(TARGET_INDEX, Metadata.VarInt((value == null) ? 0 : value.getEntityId()));
     }
 
     public boolean isRetractingSpikes() {
-        return super.metadata.getIndex(OFFSET, false);
+        return super.metadata.getIndex(RETRACTING_SPIKES_INDEX, false);
     }
 
     public @Nullable EntityWrapper getTarget() {

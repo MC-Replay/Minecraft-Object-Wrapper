@@ -10,16 +10,18 @@ public class ParrotMetadata extends TameableAnimalMetadata {
     public static final int OFFSET = TameableAnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int COLOR_INDEX = OFFSET;
+
     public ParrotMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setColor(@NotNull Color value) {
-        super.metadata.setIndex(OFFSET, Metadata.VarInt(value.ordinal()));
+        super.metadata.setIndex(COLOR_INDEX, Metadata.VarInt(value.ordinal()));
     }
 
     public @NotNull Color getColor() {
-        return Color.VALUES[super.metadata.getIndex(OFFSET, 0)];
+        return Color.VALUES[super.metadata.getIndex(COLOR_INDEX, 0)];
     }
 
     public enum Color {

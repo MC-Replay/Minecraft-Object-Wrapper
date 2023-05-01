@@ -9,34 +9,37 @@ public class AbstractArrowMetadata extends EntityMetadata {
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
-    private static final byte CRITICAL_BIT = 0x01;
-    private static final byte NO_CLIP_BIT = 0x02;
+    public static final int MASK_INDEX = OFFSET;
+    public static final int PIERCING_LEVEL_INDEX = OFFSET + 1;
+
+    public static final byte CRITICAL_BIT = 0x01;
+    public static final byte NO_CLIP_BIT = 0x02;
 
     protected AbstractArrowMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setCritical(boolean value) {
-        this.setMaskBit(OFFSET, CRITICAL_BIT, value);
+        this.setMaskBit(MASK_INDEX, CRITICAL_BIT, value);
     }
 
     public void setNoClip(boolean value) {
-        this.setMaskBit(OFFSET, NO_CLIP_BIT, value);
+        this.setMaskBit(MASK_INDEX, NO_CLIP_BIT, value);
     }
 
     public void setPiercingLevel(byte value) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.Byte(value));
+        super.metadata.setIndex(PIERCING_LEVEL_INDEX, Metadata.Byte(value));
     }
 
     public boolean isCritical() {
-        return this.getMaskBit(OFFSET, CRITICAL_BIT);
+        return this.getMaskBit(MASK_INDEX, CRITICAL_BIT);
     }
 
     public boolean isNoClip() {
-        return this.getMaskBit(OFFSET, NO_CLIP_BIT);
+        return this.getMaskBit(MASK_INDEX, NO_CLIP_BIT);
     }
 
     public byte getPiercingLevel() {
-        return super.metadata.getIndex(OFFSET + 1, (byte) 0);
+        return super.metadata.getIndex(PIERCING_LEVEL_INDEX, (byte) 0);
     }
 }

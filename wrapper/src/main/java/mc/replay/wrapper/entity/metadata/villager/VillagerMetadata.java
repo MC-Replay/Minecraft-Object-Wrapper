@@ -8,12 +8,14 @@ public class VillagerMetadata extends AbstractVillagerMetadata {
     public static final int OFFSET = AbstractVillagerMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int VILLAGER_DATA_INDEX = OFFSET;
+
     public VillagerMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setVillagerData(@NotNull VillagerData value) {
-        super.metadata.setIndex(OFFSET, Metadata.VillagerData(
+        super.metadata.setIndex(VILLAGER_DATA_INDEX, Metadata.VillagerData(
                 value.type.ordinal(),
                 value.profession.ordinal(),
                 value.level.ordinal()
@@ -21,7 +23,7 @@ public class VillagerMetadata extends AbstractVillagerMetadata {
     }
 
     public @NotNull VillagerData getVillagerData() {
-        int[] data = super.metadata.getIndex(OFFSET, null);
+        int[] data = super.metadata.getIndex(VILLAGER_DATA_INDEX, null);
         if (data == null) {
             return new VillagerData(Type.PLAINS, Profession.NONE, Level.NOVICE);
         }

@@ -17,13 +17,22 @@ public class EntityMetadata {
         return (ProtocolVersion.getServerVersion().isEqual(ProtocolVersion.MINECRAFT_1_16_5)) ? 7 : 8;
     }
 
-    private static final byte ON_FIRE_BIT = 0x01;
-    private static final byte CROUCHING_BIT = 0x02;
-    private static final byte SPRINTING_BIT = 0x08;
-    private static final byte SWIMMING_BIT = 0x10;
-    private static final byte INVISIBLE_BIT = 0x20;
-    private static final byte HAS_GLOWING_EFFECT_BIT = 0x40;
-    private static final byte FLYING_WITH_ELYTRA_BIT = (byte) 0x80;
+    public static final int MASK_INDEX = OFFSET;
+    public static final int AIR_TICKS_INDEX = OFFSET + 1;
+    public static final int CUSTOM_NAME_INDEX = OFFSET + 2;
+    public static final int CUSTOM_NAME_VISIBLE_INDEX = OFFSET + 3;
+    public static final int SILENT_INDEX = OFFSET + 4;
+    public static final int NO_GRAVITY_INDEX = OFFSET + 5;
+    public static final int POSE_INDEX = OFFSET + 6;
+    public static final int TICKS_FROZEN_INDEX = OFFSET + 7;
+
+    public static final byte ON_FIRE_BIT = 0x01;
+    public static final byte CROUCHING_BIT = 0x02;
+    public static final byte SPRINTING_BIT = 0x08;
+    public static final byte SWIMMING_BIT = 0x10;
+    public static final byte INVISIBLE_BIT = 0x20;
+    public static final byte HAS_GLOWING_EFFECT_BIT = 0x40;
+    public static final byte FLYING_WITH_ELYTRA_BIT = (byte) 0x80;
 
     protected final Metadata metadata;
 
@@ -40,117 +49,117 @@ public class EntityMetadata {
     }
 
     public void setOnFire(boolean value) {
-        this.setMaskBit(OFFSET, ON_FIRE_BIT, value);
+        this.setMaskBit(MASK_INDEX, ON_FIRE_BIT, value);
     }
 
     public void setSneaking(boolean value) {
-        this.setMaskBit(OFFSET, CROUCHING_BIT, value);
+        this.setMaskBit(MASK_INDEX, CROUCHING_BIT, value);
     }
 
     public void setSprinting(boolean value) {
-        this.setMaskBit(OFFSET, SPRINTING_BIT, value);
+        this.setMaskBit(MASK_INDEX, SPRINTING_BIT, value);
     }
 
     public void setSwimming(boolean value) {
-        this.setMaskBit(OFFSET, SWIMMING_BIT, value);
+        this.setMaskBit(MASK_INDEX, SWIMMING_BIT, value);
     }
 
     public void setInvisible(boolean value) {
-        this.setMaskBit(OFFSET, INVISIBLE_BIT, value);
+        this.setMaskBit(MASK_INDEX, INVISIBLE_BIT, value);
     }
 
     public void setHasGlowingEffect(boolean value) {
-        this.setMaskBit(OFFSET, HAS_GLOWING_EFFECT_BIT, value);
+        this.setMaskBit(MASK_INDEX, HAS_GLOWING_EFFECT_BIT, value);
     }
 
     public void setIsFlyingWithElytra(boolean value) {
-        this.setMaskBit(OFFSET, FLYING_WITH_ELYTRA_BIT, value);
+        this.setMaskBit(MASK_INDEX, FLYING_WITH_ELYTRA_BIT, value);
     }
 
     public void setAirTicks(int value) {
-        this.metadata.setIndex(OFFSET + 1, Metadata.VarInt(value));
+        this.metadata.setIndex(AIR_TICKS_INDEX, Metadata.VarInt(value));
     }
 
     public void setCustomName(@NotNull Component value) {
-        this.metadata.setIndex(OFFSET + 2, Metadata.Chat(value));
+        this.metadata.setIndex(CUSTOM_NAME_INDEX, Metadata.Chat(value));
     }
 
     public void setCustomNameVisible(boolean value) {
-        this.metadata.setIndex(OFFSET + 3, Metadata.Boolean(value));
+        this.metadata.setIndex(CUSTOM_NAME_VISIBLE_INDEX, Metadata.Boolean(value));
     }
 
     public void setSilent(boolean value) {
-        this.metadata.setIndex(OFFSET + 4, Metadata.Boolean(value));
+        this.metadata.setIndex(SILENT_INDEX, Metadata.Boolean(value));
     }
 
     public void setHasGravity(boolean value) {
-        this.metadata.setIndex(OFFSET + 5, Metadata.Boolean(!value));
+        this.metadata.setIndex(NO_GRAVITY_INDEX, Metadata.Boolean(!value));
     }
 
     public void setPose(@NotNull Pose value) {
-        this.metadata.setIndex(OFFSET + 6, Metadata.Pose(value));
+        this.metadata.setIndex(POSE_INDEX, Metadata.Pose(value));
     }
 
     public void setTickFrozen(int value) {
         if (ProtocolVersion.getServerVersion().isEqual(ProtocolVersion.MINECRAFT_1_16_5)) return;
-        this.metadata.setIndex(OFFSET + 7, Metadata.VarInt(value));
+        this.metadata.setIndex(TICKS_FROZEN_INDEX, Metadata.VarInt(value));
     }
 
     public boolean isOnFire() {
-        return this.getMaskBit(OFFSET, ON_FIRE_BIT);
+        return this.getMaskBit(MASK_INDEX, ON_FIRE_BIT);
     }
 
     public boolean isSneaking() {
-        return this.getMaskBit(OFFSET, CROUCHING_BIT);
+        return this.getMaskBit(MASK_INDEX, CROUCHING_BIT);
     }
 
     public boolean isSprinting() {
-        return this.getMaskBit(OFFSET, SPRINTING_BIT);
+        return this.getMaskBit(MASK_INDEX, SPRINTING_BIT);
     }
 
     public boolean isSwimming() {
-        return this.getMaskBit(OFFSET, SWIMMING_BIT);
+        return this.getMaskBit(MASK_INDEX, SWIMMING_BIT);
     }
 
     public boolean isInvisible() {
-        return this.getMaskBit(OFFSET, INVISIBLE_BIT);
+        return this.getMaskBit(MASK_INDEX, INVISIBLE_BIT);
     }
 
     public boolean isHasGlowingEffect() {
-        return this.getMaskBit(OFFSET, HAS_GLOWING_EFFECT_BIT);
+        return this.getMaskBit(MASK_INDEX, HAS_GLOWING_EFFECT_BIT);
     }
 
     public boolean isFlyingWithElytra() {
-        return this.getMaskBit(OFFSET, FLYING_WITH_ELYTRA_BIT);
+        return this.getMaskBit(MASK_INDEX, FLYING_WITH_ELYTRA_BIT);
     }
 
     public int getAirTicks() {
-        return this.metadata.getIndex(OFFSET + 1, 300);
+        return this.metadata.getIndex(AIR_TICKS_INDEX, 300);
     }
 
     public @NotNull Component getCustomName() {
-        return this.metadata.getIndex(OFFSET + 2, Component.empty());
+        return this.metadata.getIndex(CUSTOM_NAME_INDEX, Component.empty());
     }
 
     public boolean isCustomNameVisible() {
-        return this.metadata.getIndex(OFFSET + 3, false);
+        return this.metadata.getIndex(CUSTOM_NAME_VISIBLE_INDEX, false);
     }
 
     public boolean isSilent() {
-        return this.metadata.getIndex(OFFSET + 4, false);
+        return this.metadata.getIndex(SILENT_INDEX, false);
     }
 
     public boolean hasGravity() {
-        return !this.metadata.getIndex(OFFSET + 5, false);
+        return !this.metadata.getIndex(NO_GRAVITY_INDEX, false);
     }
 
     public @NotNull Pose getPose() {
-        return this.metadata.getIndex(OFFSET + 6, Pose.STANDING);
+        return this.metadata.getIndex(POSE_INDEX, Pose.STANDING);
     }
 
     public int getTickFrozen() {
         if (ProtocolVersion.getServerVersion().isEqual(ProtocolVersion.MINECRAFT_1_16_5)) return 0;
-        return this.metadata.getIndex(OFFSET + 7, 0);
+        return this.metadata.getIndex(TICKS_FROZEN_INDEX, 0);
     }
 
     protected byte getMask(int index) {

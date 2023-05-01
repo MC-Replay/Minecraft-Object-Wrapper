@@ -9,16 +9,19 @@ public class ZombieVillagerMetadata extends ZombieMetadata {
     public static final int OFFSET = ZombieMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
+    public static final int CONVERTING_INDEX = OFFSET;
+    public static final int VILLAGER_DATA_INDEX = OFFSET + 1;
+
     public ZombieVillagerMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setConverting(boolean value) {
-        super.metadata.setIndex(OFFSET, Metadata.Boolean(value));
+        super.metadata.setIndex(CONVERTING_INDEX, Metadata.Boolean(value));
     }
 
     public VillagerMetadata.VillagerData getVillagerData() {
-        int[] data = super.metadata.getIndex(OFFSET + 1, null);
+        int[] data = super.metadata.getIndex(VILLAGER_DATA_INDEX, null);
         if (data == null) {
             return new VillagerMetadata.VillagerData(VillagerMetadata.Type.PLAINS, VillagerMetadata.Profession.NONE, VillagerMetadata.Level.NOVICE);
         }
@@ -26,11 +29,11 @@ public class ZombieVillagerMetadata extends ZombieMetadata {
     }
 
     public boolean isConverting() {
-        return super.metadata.getIndex(OFFSET + 1, false);
+        return super.metadata.getIndex(CONVERTING_INDEX, false);
     }
 
     public void setVillagerData(VillagerMetadata.VillagerData value) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.VillagerData(
+        super.metadata.setIndex(VILLAGER_DATA_INDEX, Metadata.VillagerData(
                 value.getType().ordinal(),
                 value.getProfession().ordinal(),
                 value.getLevel().ordinal() + 1

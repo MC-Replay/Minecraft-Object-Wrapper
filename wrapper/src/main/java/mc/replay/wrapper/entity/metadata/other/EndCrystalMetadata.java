@@ -11,23 +11,26 @@ public class EndCrystalMetadata extends EntityMetadata {
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
+    public static final int BEAM_TARGET_INDEX = OFFSET;
+    public static final int SHOWING_BOTTOM_INDEX = OFFSET + 1;
+
     public EndCrystalMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setBeamTarget(@Nullable Vector value) {
-        super.metadata.setIndex(OFFSET, Metadata.OptPosition(value));
+        super.metadata.setIndex(BEAM_TARGET_INDEX, Metadata.OptPosition(value));
     }
 
     public void setShowingBottom(boolean value) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.Boolean(value));
+        super.metadata.setIndex(SHOWING_BOTTOM_INDEX, Metadata.Boolean(value));
     }
 
     public @Nullable Vector getBeamTarget() {
-        return super.metadata.getIndex(OFFSET, null);
+        return super.metadata.getIndex(BEAM_TARGET_INDEX, null);
     }
 
     public boolean isShowingBottom() {
-        return super.metadata.getIndex(OFFSET + 1, true);
+        return super.metadata.getIndex(SHOWING_BOTTOM_INDEX, true);
     }
 }

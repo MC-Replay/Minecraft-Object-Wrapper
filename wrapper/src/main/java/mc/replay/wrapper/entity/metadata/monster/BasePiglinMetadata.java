@@ -8,15 +8,17 @@ public class BasePiglinMetadata extends MonsterMetadata {
     public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int IMMUNE_TO_ZOMBIFICATION = OFFSET;
+
     protected BasePiglinMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setImmuneToZombification(boolean value) {
-        super.metadata.setIndex(OFFSET, Metadata.Boolean(value));
+        super.metadata.setIndex(IMMUNE_TO_ZOMBIFICATION, Metadata.Boolean(value));
     }
 
     public boolean isImmuneToZombification() {
-        return super.metadata.getIndex(OFFSET, false);
+        return super.metadata.getIndex(IMMUNE_TO_ZOMBIFICATION, false);
     }
 }

@@ -8,16 +8,18 @@ public class FurnaceMinecartMetadata extends AbstractMinecartMetadata {
     public static final int OFFSET = AbstractMinecartMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int FUEL_INDEX = OFFSET;
+
     public FurnaceMinecartMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setHasFuel(boolean value) {
-        super.metadata.setIndex(OFFSET, Metadata.Boolean(value));
+        super.metadata.setIndex(FUEL_INDEX, Metadata.Boolean(value));
     }
 
     public boolean hasFuel() {
-        return metadata.getIndex(OFFSET, false);
+        return metadata.getIndex(FUEL_INDEX, false);
     }
 
     @Override

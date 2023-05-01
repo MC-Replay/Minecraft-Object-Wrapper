@@ -9,24 +9,27 @@ public class CommandBlockMinecartMetadata extends AbstractMinecartMetadata {
     public static final int OFFSET = AbstractMinecartMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
+    public static final int COMMAND_INDEX = OFFSET;
+    public static final int LAST_OUTPUT_INDEX = OFFSET + 1;
+
     public CommandBlockMinecartMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setCommand(@NotNull String value) {
-        super.metadata.setIndex(OFFSET, Metadata.String(value));
+        super.metadata.setIndex(COMMAND_INDEX, Metadata.String(value));
     }
 
     public void setLastOutput(@NotNull Component value) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.Chat(value));
+        super.metadata.setIndex(LAST_OUTPUT_INDEX, Metadata.Chat(value));
     }
 
     public @NotNull String getCommand() {
-        return super.metadata.getIndex(OFFSET, "");
+        return super.metadata.getIndex(COMMAND_INDEX, "");
     }
 
     public @NotNull Component getLastOutput() {
-        return super.metadata.getIndex(OFFSET + 1, Component.empty());
+        return super.metadata.getIndex(LAST_OUTPUT_INDEX, Component.empty());
     }
 
     @Override

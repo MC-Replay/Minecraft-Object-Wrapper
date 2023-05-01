@@ -9,24 +9,27 @@ public class ZombieMetadata extends MonsterMetadata {
     public static final int OFFSET = MonsterMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 3;
 
+    public static final int BABY_INDEX = OFFSET;
+    public static final int BECOMING_DROWNED_INDEX = OFFSET + 2;
+
     public ZombieMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setBaby(boolean value) {
         if (this.isBaby() == value) return;
-        super.metadata.setIndex(OFFSET, Metadata.Boolean(value));
+        super.metadata.setIndex(BABY_INDEX, Metadata.Boolean(value));
     }
 
     public void setBecomingDrowned(boolean value) {
-        super.metadata.setIndex(OFFSET + 2, Metadata.Boolean(value));
+        super.metadata.setIndex(BECOMING_DROWNED_INDEX, Metadata.Boolean(value));
     }
 
     public boolean isBaby() {
-        return super.metadata.getIndex(OFFSET, false);
+        return super.metadata.getIndex(BABY_INDEX, false);
     }
 
     public boolean isBecomingDrowned() {
-        return super.metadata.getIndex(OFFSET + 2, false);
+        return super.metadata.getIndex(BECOMING_DROWNED_INDEX, false);
     }
 }

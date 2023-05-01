@@ -13,6 +13,9 @@ public class FishingHookMetadata extends EntityMetadata implements ShooterProvid
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
+    public static final int HOOKED_ENTITY_INDEX = OFFSET;
+    public static final int CATCHABLE_INDEX = OFFSET + 1;
+
     private EntityWrapper hooked;
     private EntityWrapper owner;
     private Integer ownerId = null;
@@ -24,11 +27,11 @@ public class FishingHookMetadata extends EntityMetadata implements ShooterProvid
     public void setHookedEntity(@Nullable EntityWrapper value) {
         this.hooked = value;
         int entityId = (value == null) ? 0 : value.getEntityId() + 1;
-        super.metadata.setIndex(OFFSET, Metadata.VarInt(entityId));
+        super.metadata.setIndex(HOOKED_ENTITY_INDEX, Metadata.VarInt(entityId));
     }
 
     public void setCatchable(boolean value) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.Boolean(value));
+        super.metadata.setIndex(CATCHABLE_INDEX, Metadata.Boolean(value));
     }
 
     public void setOwnerEntity(@Nullable EntityWrapper value) {
@@ -41,7 +44,7 @@ public class FishingHookMetadata extends EntityMetadata implements ShooterProvid
     }
 
     public boolean isCatchable() {
-        return super.metadata.getIndex(OFFSET + 1, false);
+        return super.metadata.getIndex(CATCHABLE_INDEX, false);
     }
 
     public @Nullable EntityWrapper getOwnerEntity() {

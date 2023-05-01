@@ -13,6 +13,9 @@ public class ItemFrameMetadata extends EntityMetadata implements ObjectDataProvi
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
+    public static final int ITEM_INDEX = OFFSET;
+    public static final int ROTATION_INDEX = OFFSET + 1;
+
     private Orientation orientation = Orientation.DOWN;
 
     public ItemFrameMetadata(@NotNull Metadata metadata) {
@@ -20,11 +23,11 @@ public class ItemFrameMetadata extends EntityMetadata implements ObjectDataProvi
     }
 
     public void setItem(@NotNull ItemWrapper value) {
-        super.metadata.setIndex(OFFSET, Metadata.Slot(value));
+        super.metadata.setIndex(ITEM_INDEX, Metadata.Slot(value));
     }
 
     public void setRotation(@NotNull Rotation value) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.VarInt(value.ordinal()));
+        super.metadata.setIndex(ROTATION_INDEX, Metadata.VarInt(value.ordinal()));
     }
 
     public void setOrientation(@NotNull Orientation value) {
@@ -32,11 +35,11 @@ public class ItemFrameMetadata extends EntityMetadata implements ObjectDataProvi
     }
 
     public @NotNull ItemWrapper getItem() {
-        return super.metadata.getIndex(OFFSET, new ItemWrapper(Item.AIR));
+        return super.metadata.getIndex(ITEM_INDEX, new ItemWrapper(Item.AIR));
     }
 
     public @NotNull Rotation getRotation() {
-        return Rotation.values()[super.metadata.getIndex(OFFSET + 1, 0)];
+        return Rotation.values()[super.metadata.getIndex(ROTATION_INDEX, 0)];
     }
 
     public @NotNull Orientation getOrientation() {

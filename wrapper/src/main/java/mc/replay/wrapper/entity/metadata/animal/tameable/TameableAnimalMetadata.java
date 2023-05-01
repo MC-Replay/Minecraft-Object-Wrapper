@@ -11,34 +11,37 @@ public class TameableAnimalMetadata extends AnimalMetadata {
     public static final int OFFSET = AnimalMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 2;
 
-    private static final byte SITTING_BIT = 0x01;
-    private static final byte TAMED_BIT = 0x04;
+    public static final int MASK_INDEX = OFFSET;
+    public static final int OWNER_INDEX = OFFSET + 1;
+
+    public static final byte SITTING_BIT = 0x01;
+    public static final byte TAMED_BIT = 0x04;
 
     protected TameableAnimalMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setSitting(boolean value) {
-        this.setMaskBit(OFFSET, SITTING_BIT, value);
+        this.setMaskBit(MASK_INDEX, SITTING_BIT, value);
     }
 
     public void setTamed(boolean value) {
-        this.setMaskBit(OFFSET, TAMED_BIT, value);
+        this.setMaskBit(MASK_INDEX, TAMED_BIT, value);
     }
 
     public void setOwner(@NotNull UUID value) {
-        super.metadata.setIndex(OFFSET + 1, Metadata.OptUUID(value));
+        super.metadata.setIndex(OWNER_INDEX, Metadata.OptUUID(value));
     }
 
     public boolean isSitting() {
-        return this.getMaskBit(OFFSET, SITTING_BIT);
+        return this.getMaskBit(MASK_INDEX, SITTING_BIT);
     }
 
     public boolean isTamed() {
-        return this.getMaskBit(OFFSET, TAMED_BIT);
+        return this.getMaskBit(MASK_INDEX, TAMED_BIT);
     }
 
     public @NotNull UUID getOwner() {
-        return super.metadata.getIndex(OFFSET + 1, null);
+        return super.metadata.getIndex(OWNER_INDEX, null);
     }
 }

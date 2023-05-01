@@ -12,6 +12,8 @@ public class FallingBlockMetadata extends EntityMetadata implements ObjectDataPr
     public static final int OFFSET = EntityMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int SPAWN_POSITION_INDEX = OFFSET;
+
     // TODO change material to block object with stateId and type
     private Material material = Material.STONE;
 
@@ -20,11 +22,11 @@ public class FallingBlockMetadata extends EntityMetadata implements ObjectDataPr
     }
 
     public void setSpawnPosition(@NotNull Vector value) {
-        super.metadata.setIndex(OFFSET, Metadata.Position(value));
+        super.metadata.setIndex(SPAWN_POSITION_INDEX, Metadata.Position(value));
     }
 
     public @NotNull Vector getSpawnPosition() {
-        return super.metadata.getIndex(OFFSET, new Vector(0, 0, 0));
+        return super.metadata.getIndex(SPAWN_POSITION_INDEX, new Vector(0, 0, 0));
     }
 
     public void setMaterial(@NotNull Material material) {

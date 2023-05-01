@@ -9,16 +9,18 @@ public class EnderDragonMetadata extends MobMetadata {
     public static final int OFFSET = MobMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
+    public static final int PHASE_INDEX = OFFSET;
+
     public EnderDragonMetadata(@NotNull Metadata metadata) {
         super(metadata);
     }
 
     public void setPhase(@NotNull Phase value) {
-        super.metadata.setIndex(OFFSET, Metadata.VarInt(value.ordinal()));
+        super.metadata.setIndex(PHASE_INDEX, Metadata.VarInt(value.ordinal()));
     }
 
     public @NotNull Phase getPhase() {
-        return Phase.VALUES[super.metadata.getIndex(OFFSET, 0)];
+        return Phase.VALUES[super.metadata.getIndex(PHASE_INDEX, 0)];
     }
 
     public enum Phase {
