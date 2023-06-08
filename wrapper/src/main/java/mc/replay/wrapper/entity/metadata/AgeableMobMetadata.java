@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class AgeableMobMetadata extends MobMetadata {
 
-    public static final int OFFSET = MobMetadata.OFFSET;
+    public static final int OFFSET = MobMetadata.MAX_OFFSET;
     public static final int MAX_OFFSET = OFFSET + 1;
 
     public static final int BABY_INDEX = OFFSET;
